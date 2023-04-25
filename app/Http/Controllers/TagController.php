@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class TagController extends Controller
 {
@@ -30,7 +31,13 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tag = new Tag();
+        $tag->nama = $request->name;
+        $tag->slug = Str::slug($request->name);
+
+        $tag->save();
+
+        return redirect()->back();
     }
 
     /**

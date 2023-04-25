@@ -26,7 +26,7 @@
             
             <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                 <div class="widget-content widget-content-area br-6">
-                    <button class="btn btn-secondary"> New Blog</button>
+                    <button class="btn btn-secondary"> New Kategori</button>
                     <div class="table-responsive mb-4 mt-4">
                         <table id="default-ordering" class="table style-3 table-hover" style="width:100%">
                             <thead>

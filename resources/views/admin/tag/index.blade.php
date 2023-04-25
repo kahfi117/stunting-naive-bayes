@@ -34,7 +34,7 @@
                                     <th>No</th>
                                     <th>Nama Tag</th>
                                     <th>Slug</th>
-                                    <th>Action</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             @php

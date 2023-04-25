@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 
 class KategoriController extends Controller
 {
@@ -30,7 +32,13 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tag = new Kategori();
+        $tag->nama = $request->name;
+        $tag->slug = Str::slug($request->name);
+
+        $tag->save();
+
+        return redirect()->back();
     }
 
     /**
