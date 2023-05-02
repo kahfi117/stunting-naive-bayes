@@ -32,11 +32,11 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        $tag = new Kategori();
-        $tag->nama = $request->name;
-        $tag->slug = Str::slug($request->name);
+        $kategori = new Kategori();
+        $kategori->nama = $request->name;
+        $kategori->slug = Str::slug($request->name);
 
-        $tag->save();
+        $kategori->save();
 
         return redirect()->back();
     }
@@ -54,7 +54,7 @@ class KategoriController extends Controller
      */
     public function edit(Kategori $kategori)
     {
-        //
+        
     }
 
     /**
@@ -62,7 +62,12 @@ class KategoriController extends Controller
      */
     public function update(Request $request, Kategori $kategori)
     {
-        //
+        $kategori->nama = $request->name;
+        $kategori->slug = Str::slug($request->name);
+
+        $kategori->update();
+
+        return redirect()->back();
     }
 
     /**

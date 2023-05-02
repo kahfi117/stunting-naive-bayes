@@ -47,8 +47,8 @@
                                     <td>{{ $item->nama }}</td>
                                     <td>{{ $item->slug }}</td>
                                     <td class="text-center">
-                                        <button class="btn btn-primary">Edit</button> 
-                                        <button class="btn btn-danger">Delete</button> 
+                                        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalEdit_{{$item->id}}">Edit</button>
+                                        <button class="btn btn-danger" data-toggle="modal" data-target="#modalDelete_{{$item->id}}">Delete</button>
                                     </td>
                                 </tr>
                                 @empty
