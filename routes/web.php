@@ -15,20 +15,26 @@ use App\Http\Controllers\TagController;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.dashboard');
+
+Route::get('/', function(){
+    return view('user.base');
 })->name('home');
 
-Route::get('/admin', function () {
-    return view('admin.dashboard');
-})->name('dashboard');
 
-Route::get('/blog', function () {
-    return view('admin.blog.index');
-})->name('blog');
+Route::prefix('admin')->group(function() {
+    Route::get('/', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
+    
+    Route::get('/blog', function () {
+        return view('admin.blog.index');
+    })->name('blog');
+
+    Route::resource('/kategori',KategoriController::class);
+
+    Route::resource('/tag',TagController::class);
+});
 
 
-Route::resource('/kategori',KategoriController::class);
-Route::resource('/tag',TagController::class);
 
 
