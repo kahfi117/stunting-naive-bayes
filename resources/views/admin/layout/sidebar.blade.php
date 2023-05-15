@@ -81,8 +81,8 @@
             {{-- APPS NAV END --}}
 
 
-            <li class="menu {{Request::is('blog') || Request::is('kategori*') || Request::is('tag*')  ? 'active' : ''}}">
-                <a href="#blog" data-toggle="collapse" aria-expanded="{{Request::is('blog*') || Request::is('kategori*') || Request::is('tag*')  ? 'true' : ''}}" class="dropdown-toggle">
+            <li class="menu {{Request::is('admin/blog') || Request::is('admin/kategori*') || Request::is('admin/tag*')  ? 'active' : ''}}">
+                <a href="#blog" data-toggle="collapse" aria-expanded="{{Request::is('admin/blog*') || Request::is('admin/kategori*') || Request::is('admin/tag*')  ? 'true' : ''}}" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clipboard"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
                         <span>Blogs</span>
@@ -91,14 +91,14 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
                     </div>
                 </a>
-                <ul class="collapse submenu list-unstyled {{Request::is('blog*') || Request::is('kategori*') || Request::is('tag*')  ? 'show' : ''}}" id="blog" data-parent="#accordionExample">
-                    <li class="{{Request::is('blog*') ? 'active' : ''}}">
-                        <a href="{{ route('blog') }}"> Blog </a>
+                <ul class="collapse submenu list-unstyled {{Request::is('admin/blog*') || Request::is('admin/kategori*') || Request::is('admin/tag*')  ? 'show' : ''}}" id="blog" data-parent="#accordionExample">
+                    <li class="{{Request::is('admin/blog*') ? 'active' : ''}}">
+                        <a href="{{ route('blog.index') }}"> Blog </a>
                     </li>
-                    <li class="{{Request::is('kategori*') ? 'active' : ''}}">
+                    <li class="{{Request::is('admin/kategori*') ? 'active' : ''}}">
                         <a href="{{ route('kategori.index') }}"> Kategori  </a>
                     </li>
-                    <li class="{{Request::is('tag*') ? 'active' : ''}}">
+                    <li class="{{Request::is('admin/tag*') ? 'active' : ''}}">
                         <a href="{{ route('tag.index') }}"> Tag </a>
                     </li> 
                 </ul>
@@ -115,10 +115,18 @@
             </li>
 
             <li class="menu">
-                <a href="widgets.html" aria-expanded="false" class="dropdown-toggle">
+                <a href="{{ route('training.index') }}" aria-expanded="{{Request::is('admin/training*') ? 'true' : ''}}" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg>
                         <span>Data Testing</span>
+                    </div>
+                </a>
+            </li>
+
+            <li class="menu">
+                <a href="{{ route('user.index') }}" aria-expanded="{{Request::is('admin/user*') ? 'true' : ''}}" class="dropdown-toggle">
+                    <div class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.3,12.22A4.92,4.92,0,0,0,14,8.5a5,5,0,0,0-10,0,4.92,4.92,0,0,0,1.7,3.72A8,8,0,0,0,1,19.5a1,1,0,0,0,2,0,6,6,0,0,1,12,0,1,1,0,0,0,2,0A8,8,0,0,0,12.3,12.22ZM9,11.5a3,3,0,1,1,3-3A3,3,0,0,1,9,11.5Zm9.74.32A5,5,0,0,0,15,3.5a1,1,0,0,0,0,2,3,3,0,0,1,3,3,3,3,0,0,1-1.5,2.59,1,1,0,0,0-.5.84,1,1,0,0,0,.45.86l.39.26.13.07a7,7,0,0,1,4,6.38,1,1,0,0,0,2,0A9,9,0,0,0,18.74,11.82Z"/></svg>                        <span>Data User</span>
                     </div>
                 </a>
             </li>

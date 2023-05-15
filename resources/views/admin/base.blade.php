@@ -9,6 +9,7 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('dashboard/assets/img/dinses/sinjai.png')}}"/>
     
     @stack('style')
+    <script src="//cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
 
 </head>
 <body class="sidebar-noneoverflow">
@@ -36,11 +37,12 @@
         @yield('content')
         <!--  END CONTENT AREA  -->
 
-
+        @include('sweetalert::alert')
     </div>
     <!-- END MAIN CONTAINER -->
 
     @stack('script')
+
 
 </body>
 </html>

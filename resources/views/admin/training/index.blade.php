@@ -26,63 +26,55 @@
             
             <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                 <div class="widget-content widget-content-area br-6">
-                    <a href="{{ route('blog.create') }}" class="btn btn-secondary"> New Blog</a>
+                    <button class="btn btn-secondary" data-toggle="modal" data-target="#newDataModal"> New Data</button>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#newExportModal">Export Data Training</button>
                     <div class="table-responsive mb-4 mt-4">
                         <table id="default-ordering" class="table style-3 table-hover" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Tumbnail</th>
-                                    <th>Judul</th>
-                                    <th>Kategori</th>
-                                    <th>Tag</th>
-                                    <th>Is Publish</th>
-                                    <th>Action</th>
+                                    <th>Nama</th>
+                                    <th>Umur(bulan)</th>
+                                    <th>BB</th>
+                                    <th>TB</th>
+                                    <th>LLA</th>
+                                    <th>Status</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             @php
                                 $no = 1;
                             @endphp
                             <tbody>
-                                @forelse ($blog as $item)    
+                                @forelse ($training as $item)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>
-                                        <span><img src="{{ URL::to('/') }}/images/{{ $item->tumbnail }}" class="profile-img" alt="avatar"></span>
-                                    </td>
-                                    <td>{{ $item->title }}</td>
-                                    <td>{{ $item->kategori->nama }}</td>
-                                    <td>
-                                        @foreach ($item->tags as $tag)
-                                        {{ $tag->nama }}<br>
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        @if ($item->deleted_at != null)
-                                        <span class="shadow-none badge badge-danger">Archive</span>
-                                        @else
-                                        <span class="shadow-none badge badge-primary">Published</span>
-                                        @endif
-                                    </td>
+                                    <td>{{ $item->nama }}</td>
+                                    <td class="text-center">{{ $item->umur }}</td>
+                                    <td>{{ $item->berat_badan }}</td>
+                                    <td>{{ $item->tinggi_badan }}</td>
+                                    <td>{{ $item->lingkar_atas }}</td>
+                                    <td>{{ $item->status }}</td>
                                     <td class="text-center">
-                                        <a href="{{ route('blog.edit', $item->id) }}" class="btn btn-success">Edit</a> 
+                                        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalEdit_{{$item->id}}">Edit</button>
                                         <button class="btn btn-danger" data-toggle="modal" data-target="#modalDelete_{{$item->id}}">Delete</button>
                                     </td>
                                 </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="7" class="text-center">NO DATA</td>
+                                        <td colspan="8" class="text-center">NO DATA KATEGORI</td>
                                     </tr>
                                 @endforelse
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Umur</th>
+                                    <th>BB</th>
+                                    <th>TB</th>
+                                    <th>LLA</th>
+                                    <th>Status</th>
                                     <th class="invisible"></th>
                                 </tr>
                             </tfoot>
@@ -93,17 +85,18 @@
 
         </div>
 
-        @include('admin.blog.modal')
+        @include('admin.training.modal')
+
         </div>
-<div class="footer-wrapper">
-        <div class="footer-section f-section-1">
-            <p class="">Copyright © 2020 <a target="_blank" href="https://designreset.com">DesignReset</a>, All rights reserved.</p>
+            <div class="footer-wrapper">
+                <div class="footer-section f-section-1">
+                    <p class="">Copyright © 2020 <a target="_blank" href="https://designreset.com">DesignReset</a>, All rights reserved.</p>
+                </div>
+                <div class="footer-section f-section-2">
+                    <p class="">Coded with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></p>
+                </div>
+            </div>
         </div>
-        <div class="footer-section f-section-2">
-            <p class="">Coded with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></p>
-        </div>
-    </div>
-</div>
 @endsection
 
 @push('script')

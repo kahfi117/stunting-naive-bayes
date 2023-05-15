@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\TrainingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,23 +20,33 @@ use App\Http\Controllers\TagController;
 */
 
 
-Route::get('/', function(){
-    return view('user.base');
-})->name('home');
+Route::controller(HomeController::class)->group(function() {
+    Route::get('/', 'home')->name('home');
+    Route::get('/blog', 'blog')->name('blog');
+    Route::get('/contact', 'contact')->name('contact');
+});
 
 
 Route::prefix('admin')->group(function() {
     Route::get('/', function () {
         return view('admin.dashboard');
     })->name('dashboard');
-    
-    Route::get('/blog', function () {
-        return view('admin.blog.index');
-    })->name('blog');
+
+    Route::post('/blog/image/store', [BaseController::class, 'image'])->name('blog.imageStore');
+    Route::resource('/blog', BlogController::class);
 
     Route::resource('/kategori',KategoriController::class);
 
     Route::resource('/tag',TagController::class);
+    Route::resource('/user',PetugasController::class);
+
+    Route::controller(TrainingController::class)->group(function() {
+        Route::get('/training', 'index')->name('training.index');
+        Route::post('/training/store', 'store')->name('training.store');
+        Route::post('/training/destroy/{id}', 'destroy')->name('training.destroy');
+        Route::patch('/training/{id}/update', 'update')->name('training.update');
+        Route::post('/training/import_excel', 'import_excel')->name('training.import');
+    });
 });
 
 

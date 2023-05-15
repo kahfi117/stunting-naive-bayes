@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class KategoriController extends Controller
@@ -35,9 +36,10 @@ class KategoriController extends Controller
         $kategori = new Kategori();
         $kategori->nama = $request->name;
         $kategori->slug = Str::slug($request->name);
-
         $kategori->save();
 
+        Alert::toast('Berhasil Menambahkan Kategori Baru', 'success');
+        
         return redirect()->back();
     }
 
@@ -67,14 +69,22 @@ class KategoriController extends Controller
 
         $kategori->update();
 
+        Alert::toast('Berhasil Memperbaharui Kategori', 'success');
+
         return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Kategori $kategori)
+    public function destroy($id)
     {
-        //
+        $kategori = Kategori::findOrFail($id);
+
+        $kategori->delete();
+
+        Alert::toast('Berhasil Menghapus Kategori', 'success');
+
+        return redirect()->back();
     }
 }

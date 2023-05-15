@@ -26,17 +26,15 @@
             
             <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                 <div class="widget-content widget-content-area br-6">
-                    <a href="{{ route('blog.create') }}" class="btn btn-secondary"> New Blog</a>
+                    <a href="{{ route('user.create') }}" class="btn btn-secondary"> New User</a>
                     <div class="table-responsive mb-4 mt-4">
                         <table id="default-ordering" class="table style-3 table-hover" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Tumbnail</th>
-                                    <th>Judul</th>
-                                    <th>Kategori</th>
-                                    <th>Tag</th>
-                                    <th>Is Publish</th>
+                                    <th>Nama</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -44,45 +42,37 @@
                                 $no = 1;
                             @endphp
                             <tbody>
-                                @forelse ($blog as $item)    
+                                @forelse ($user as $item)    
                                 <tr>
                                     <td>{{ $no++ }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->email }}</td>
                                     <td>
-                                        <span><img src="{{ URL::to('/') }}/images/{{ $item->tumbnail }}" class="profile-img" alt="avatar"></span>
-                                    </td>
-                                    <td>{{ $item->title }}</td>
-                                    <td>{{ $item->kategori->nama }}</td>
-                                    <td>
-                                        @foreach ($item->tags as $tag)
-                                        {{ $tag->nama }}<br>
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        @if ($item->deleted_at != null)
-                                        <span class="shadow-none badge badge-danger">Archive</span>
+                                        @if ($item->role == 'admin')
+                                        <span class="shadow-none badge badge-danger">Admin</span>
+                                        @elseif ($item->role == 'petugas')
+                                        <span class="shadow-none badge badge-warning">Petugas</span>
                                         @else
-                                        <span class="shadow-none badge badge-primary">Published</span>
+                                        <span class="shadow-none badge badge-primary">User</span>
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ route('blog.edit', $item->id) }}" class="btn btn-success">Edit</a> 
-                                        <button class="btn btn-danger" data-toggle="modal" data-target="#modalDelete_{{$item->id}}">Delete</button>
+                                        <a href="{{ route('user.edit',$item->id) }}" class="btn btn-success">Edit</a>
+                                        <button class="btn btn-danger" data-toggle="modal" data-target="#modalDelete_{{$item->id}}">Hapus</button>
                                     </td>
                                 </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="7" class="text-center">NO DATA</td>
+                                        <td colspan="5" class="text-center">NO DATA</td>
                                     </tr>
                                 @endforelse
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
                                     <th class="invisible"></th>
                                 </tr>
                             </tfoot>
@@ -92,10 +82,9 @@
             </div>
 
         </div>
-
-        @include('admin.blog.modal')
+        @include('admin.petugas.modal')
         </div>
-<div class="footer-wrapper">
+    <div class="footer-wrapper">
         <div class="footer-section f-section-1">
             <p class="">Copyright © 2020 <a target="_blank" href="https://designreset.com">DesignReset</a>, All rights reserved.</p>
         </div>

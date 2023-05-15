@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TagController extends Controller
 {
@@ -36,6 +37,7 @@ class TagController extends Controller
         $tag->slug = Str::slug($request->name);
 
         $tag->save();
+        Alert::toast('Berhasil Menambahkan Tag Baru', 'success');
 
         return redirect()->back();
     }
@@ -53,7 +55,7 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        //
+        
     }
 
     /**
@@ -61,7 +63,14 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        $tag->nama = $request->name;
+        $tag->slug = Str::slug($request->name);
+
+        $tag->update();
+
+        Alert::toast('Berhasil Memperbaharui Tag', 'success');
+
+        return redirect()->back();
     }
 
     /**
@@ -69,6 +78,9 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+        Alert::toast('Berhasil Menghapus Tag', 'success');
+
+        return redirect()->back();
     }
 }
