@@ -14,6 +14,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/plugins/table/datatable/custom_dt_custom.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/assets/css/forms/theme-checkbox-radio.css')}}">
 
+    <link href="{{ asset('dashboard/plugins/tagInput/tags-input.css')}}" rel="stylesheet" type="text/css" />
+
     <!-- END PAGE LEVEL CUSTOM STYLES -->
 @endpush
 
@@ -27,7 +29,9 @@
             <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                 <div class="widget-content widget-content-area br-6">
                     <button class="btn btn-secondary" data-toggle="modal" data-target="#newDataModal"> New Data</button>
-                    <button class="btn btn-success" data-toggle="modal" data-target="#newExportModal">Export Data Training</button>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#newExportModal">Import Data Training</button>
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#truncateModal">Bersihkan Data Traning</button>
+                    
                     <div class="table-responsive mb-4 mt-4">
                         <table id="default-ordering" class="table style-3 table-hover" style="width:100%">
                             <thead>
@@ -54,7 +58,16 @@
                                     <td>{{ $item->berat_badan }}</td>
                                     <td>{{ $item->tinggi_badan }}</td>
                                     <td>{{ $item->lingkar_atas }}</td>
-                                    <td>{{ $item->status }}</td>
+                                    @if ($item->status == 'absence')
+                                    <td>
+                                        <span class="badge badge-primary"> Absence </span>
+                                    </td>
+                                    @else
+                                    <td>
+                                        <span class="badge badge-danger"> Presence </span>
+                                    </td>
+                                        
+                                    @endif
                                     <td class="text-center">
                                         <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalEdit_{{$item->id}}">Edit</button>
                                         <button class="btn btn-danger" data-toggle="modal" data-target="#modalDelete_{{$item->id}}">Delete</button>
@@ -112,6 +125,7 @@
             App.init();
         });
     </script>
+    <script src="{{ asset('dashboard/plugins/highlight/highlight.pack.js')}}"></script>
     <script src="{{ asset('dashboard/assets/js/custom.js')}}"></script>
     <!-- END GLOBAL MANDATORY SCRIPTS -->
 
@@ -133,5 +147,7 @@
             drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
 	    } );
     </script>
+    <script src="{{ asset('dashboard/assets/js/scrollspyNav.js')}}"></script>
+    <script src="{{ asset('dashboard/plugins/tagInput/tags-input.js')}}"></script>
     <!-- END PAGE LEVEL CUSTOM SCRIPTS -->
 @endpush

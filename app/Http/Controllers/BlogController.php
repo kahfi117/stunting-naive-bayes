@@ -89,7 +89,25 @@ class BlogController extends Controller
      */
     public function update(Request $request, Blog $blog)
     {
-        //
+        $image = $request->file('gambar');
+        $imageName = time().'.'.$image->getClientOriginalExtension();
+        $image->move(public_path('images'), $imageName);
+
+
+        $blog->title = $request->judul;
+        $blog->slug = Str::slug($request->judul);
+        $blog->kategori_id = $request->kategori;
+        $blog->user_id = 1;
+        $blog->konten = $request->konten;
+        $blog->tumbnail = $imageName;
+
+        $blog->save();
+
+
+        $blog->tags()->sync($request->tag);
+
+        Alert::toast('Berhasil Menambahkan Konten Baru', 'success');
+        return redirect()->route('blog.index');
     }
 
     /**

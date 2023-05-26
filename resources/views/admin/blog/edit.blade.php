@@ -32,13 +32,14 @@
                         </div>
                     </div> 
                     <form action="{{ route('blog.update', $blog->id) }}" method="post" enctype="multipart/form-data">
+                        @method("PUT")
                         @csrf
                         <div class="widget-content widget-content-area">
                             <div class="row">
                                 <div class="col-lg-12 col-12 mx-auto">
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Judul Blog</label> 
-                                    <input type="text" class="form-control" name="judul" id="exampleFormControlInput1" placeholder="Enter the Title" required>
+                                    <input type="text" class="form-control" name="judul" id="exampleFormControlInput1" value="{{ $blog->title }}" required>
                                 </div>
                             </div>
                         </div>
@@ -67,7 +68,7 @@
                             <div class="col-lg-12 col-12 mx-auto">
                                 <div class="form-group">
                                     <label for="kategoriSelect">Konten</label> 
-                                    <textarea name="konten" id="editor" class="form-control ckeditor"></textarea>
+                                    <textarea name="konten" id="editor" class="form-control ckeditor">{!! $blog->konten !!}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -77,7 +78,7 @@
                                     <label for="kategoriSelect">Tag</label> 
                                     <select name="tag[]" id="tagSelect" class="form-control" multiple>
                                         @foreach ($tag as $t)
-                                        <option value="{{ $t->id }}">{{ $t->nama }}</option>
+                                        <option value="{{ $t->id }}" >{{ $t->nama }}</option>
                                         @endforeach
                                     </select>
                                 </div>

@@ -24,6 +24,7 @@ Route::controller(HomeController::class)->group(function() {
     Route::get('/', 'home')->name('home');
     Route::get('/blog', 'blog')->name('blog');
     Route::get('/contact', 'contact')->name('contact');
+    Route::get('/blog/{slug}', 'detailBlog')->name('detailBlog');
 });
 
 
@@ -46,6 +47,7 @@ Route::prefix('admin')->group(function() {
         Route::post('/training/destroy/{id}', 'destroy')->name('training.destroy');
         Route::patch('/training/{id}/update', 'update')->name('training.update');
         Route::post('/training/import_excel', 'import_excel')->name('training.import');
+        Route::post('/training/truncate', 'truncate')->name('training.truncate');
     });
 });
 

@@ -29,26 +29,17 @@
     <div class="layout-px-spacing">
 
         <div class="row layout-top-spacing">
-
+            
             <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-                <div class="widget widget-chart-one">
+                <div class="widget widget-chart-two">
                     <div class="widget-heading">
-                        <h5 class="">Revenue</h5>
-                        <ul class="tabs tab-pills">
-                            <li><a href="javascript:void(0);" id="tb_1" class="tabmenu">Monthly</a></li>
-                        </ul>
+                        <h5 class="">Sales by Category</h5>
                     </div>
-
                     <div class="widget-content">
-                        <div class="tabs tab-content">
-                            <div id="content_1" class="tabcontent"> 
-                                <div id="revenueMonthly"></div>
-                            </div>
-                        </div>
+                        <iframe style="height:550px; width:100%; border: none;" src="https://databoks.katadata.co.id/datapublishembed/148655/angka-stunting-indonesia-turun-pada-2022-rekor-terbaik-dekade-ini"></iframe>
                     </div>
                 </div>
             </div>
-
             <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                 <div class="widget widget-chart-two">
                     <div class="widget-heading">
@@ -59,6 +50,38 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                <div class="widget widget-chart-one">
+                    <div class="widget-heading">
+                        <h5 class="">Revenue</h5>
+                        <ul class="tabs tab-pills">
+                            <li><a href="javascript:void(0);" id="tb_1" class="tabmenu">Monthly</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="widget-content">
+                        <iframe style="height:580px; width:100%; border: none;" src="https://databoks.katadata.co.id/datapublishembed/152675/ini-sejumlah-penyebab-utama-anak-mengalami-stunting-menurut-survei-litbang-kompas"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                <div class="widget widget-chart-one">
+                    <div class="widget-heading">
+                        <h5 class="">Revenue</h5>
+                        <ul class="tabs tab-pills">
+                            <li><a href="javascript:void(0);" id="tb_1" class="tabmenu">Monthly</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="widget-content">
+                        <iframe style="height:600px; width:100%; border: none;" src="https://databoks.katadata.co.id/datapublishembed/149622/prevalensi-balita-stunting-sulawesi-selatan-capai-272-pada-2022-berikut-sebaran-wilayahnya">
+                        </iframe>                    
+                    </div>
+                </div>
+            </div>
+
 
             <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
                 <div class="widget-two">

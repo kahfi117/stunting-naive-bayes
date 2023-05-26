@@ -8,6 +8,7 @@ use App\Models\Training;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Exceptions\UnreadableFileException;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
@@ -15,7 +16,7 @@ class TrainingController extends Controller
 {
 
     public function index(){
-        $training = Training::orderBy('id', 'ASC')->get();
+        $training = Training::orderBy('nama', 'ASC')->get();
 
         return view('admin.training.index', compact('training'));
     }
@@ -68,27 +69,49 @@ class TrainingController extends Controller
 		$request->validate([
             'file' => 'required|mimes:csv,xls,xlsx'
         ]);        
-
-
+        
         $file = $request->file('file');
-        $nama_file = rand().$file->getClientOriginalName();
-        if (!in_array($nama_file, ['csv', 'xls', 'xlsx'])) {
-            // upload ke folder file_siswa di dalam folder public
-            $file->move('file_training',$nama_file);
+        if ($file){
+
+            $nama_file = rand().$file->getClientOriginalName();
+            $ekstensi_file = $file->getClientOriginalExtension();
     
-            // import data
-            Excel::import(new TrainingImport, public_path('/file_training/'.$nama_file));
-    
-            Alert::toast('Berhasil Mengimport Data', 'success');
-    
-            // alihkan halaman kembali
-            return redirect()->back();
+            if (in_array($ekstensi_file, ['csv', 'xls', 'xlsx'])) {
+                // upload ke folder file_siswa di dalam folder public
+                $file->move('file_training',$nama_file);
+        
+                try {
+                    // import data
+                    Excel::import(new TrainingImport, public_path('/file_training/' . $nama_file));
+        
+                    Alert::toast('Berhasil Mengimport Data', 'success');
+                    return redirect()->back();
+                } catch (UnreadableFileException $e) {
+
+                    Alert::toast('File Excel tidak dapat dibaca. Pastikan file memiliki format yang benar.', 'error');
+                    return redirect()->back();
+
+                } catch (\Exception $e) {
+
+                    Alert::toast('Terjadi kesalahan saat mengimpor data dari file Excel.', 'error');
+                    return redirect()->back();
+                    
+                }
+            }
         }
 
         Alert::toast('File Tidak Support', 'error');
         return redirect()->back(); 
         
 	}
+
+    public function truncate(){
+        Training::truncate();
+
+        Alert::toast('Berhasil Mengosongkan Data Training', 'success');
+  
+        return redirect()->back();
+    }
 
 
 

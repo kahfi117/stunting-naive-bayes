@@ -7,9 +7,9 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!--====== Title ======-->
-        <title>Vedhak - Adventure Tours and Travel HTML Template</title>
+        <title>SISTEM INFORMASI PENCEGAHAN STUNTING</title>
         <!--====== Favicon Icon ======-->
-        <link rel="shortcut icon" href="{{  asset('user/assets/images/favicon.ico')}}" type="image/png">
+        <link rel="shortcut icon" href="{{  asset('user/assets/images/logo/logo.png')}}" type="image/png">
         <!--====== Flaticon css ======-->
         <link rel="stylesheet" href="{{  asset('user/assets/fonts/flaticon/flaticon.css')}}">
         <!--====== FontAwesome css ======-->
@@ -62,86 +62,38 @@
                 <div class="row">
                     <div class="col-xl-8 col-lg-7">
                         <div class="blog-standard-wrapper mb-30">
+                            @foreach ($blog as $item)
+                                
                             <div class="blog-standard-post-item mb-50 wow fadeInUp">
                                 <div class="post-thumbnail">
-                                    <img src="{{  asset('user/assets/images/blog/blog-standard-1.jpg')}}" alt="Post Image">
+                                    <img src="{{  asset('images/'.$item->tumbnail)}}" alt="Post Image">
                                 </div>
                                 <div class="entry-content">
                                     <div class="post-meta">
                                         <ul>
-                                            <li><span><a href="#"><i class="far fa-calendar-alt"></i> November 23,2022</a></span></li>
-                                            <li><span><a href="#"><i class="far fa-comment"></i> Comments (05)</a></span></li>
+                                            <li><span><a href="#"><i class="far fa-calendar-alt"></i> {{ date('M d,Y', strtotime($item->created_at))}}</a></span></li>
+                                            <li><span><a href="#"><i class="far fa-user"></i> {{ $item->user->name }}</a></span></li>
                                         </ul>
                                     </div>
-                                    <h3 class="title"><a href="blog-details.html">50 Resources And Tools To Turbocharge Amazon
-                                        Product Scraper Copywriting Skills</a></h3>
+                                    <h3 class="title">
+                                        <a href="blog-details.html">
+                                            {!! $item->title !!}
+                                        </a>
+                                    </h3>
                                     <a href="#" class="btn-link">read more<i class="far fa-angle-double-right"></i></a>
                                 </div>
                             </div>
-                            <div class="blog-standard-post-item mb-50 wow fadeInUp">
-                                <div class="post-thumbnail">
-                                    <img src="{{  asset('user/assets/images/blog/blog-standard-2.jpg')}}" alt="Post Image">
-                                </div>
-                                <div class="entry-content">
-                                    <div class="post-meta">
-                                        <ul>
-                                            <li><span><a href="#"><i class="far fa-calendar-alt"></i> November 23,2022</a></span></li>
-                                            <li><span><a href="#"><i class="far fa-comment"></i> Comments (05)</a></span></li>
-                                        </ul>
-                                    </div>
-                                    <h3 class="title"><a href="blog-details.html">Building A Static-First MadLib Generator With Portable Text Netlify Builder Functions</a></h3>
-                                    <a href="#" class="btn-link">read more<i class="far fa-angle-double-right"></i></a>
-                                </div>
-                            </div>
-                            <div class="blog-standard-post-item mb-50 wow fadeInUp">
-                                <div class="post-thumbnail">
-                                    <img src="{{  asset('user/assets/images/blog/blog-standard-3.jpg')}}" alt="Post Image">
-                                </div>
-                                <div class="entry-content">
-                                    <div class="post-meta">
-                                        <ul>
-                                            <li><span><a href="#"><i class="far fa-calendar-alt"></i> November 23,2022</a></span></li>
-                                            <li><span><a href="#"><i class="far fa-comment"></i> Comments (05)</a></span></li>
-                                        </ul>
-                                    </div>
-                                    <h3 class="title"><a href="blog-details.html">How To Implement Search Functionality In Your Nuxt App Using Algolia InstantSearch</a></h3>
-                                    <a href="#" class="btn-link">read more<i class="far fa-angle-double-right"></i></a>
-                                </div>
-                            </div>
-                            <div class="blog-standard-post-item mb-50 wow fadeInUp">
-                                <div class="post-thumbnail">
-                                    <img src="{{  asset('user/assets/images/blog/blog-standard-4.jpg')}}" alt="Post Image">
-                                </div>
-                                <div class="entry-content">
-                                    <div class="post-meta">
-                                        <ul>
-                                            <li><span><a href="#"><i class="far fa-calendar-alt"></i> November 23,2022</a></span></li>
-                                            <li><span><a href="#"><i class="far fa-comment"></i> Comments (05)</a></span></li>
-                                        </ul>
-                                    </div>
-                                    <h3 class="title"><a href="blog-details.html">Monetize Open-Source Software With Gatsby Functions And Stripe Quality Assurance</a></h3>
-                                    <a href="#" class="btn-link">read more<i class="far fa-angle-double-right"></i></a>
-                                </div>
-                            </div>
-                            <div class="vedhak-pagination mt-30 wow fadeInUp">
-                                <ul>
-                                    <li><a href="#" class="prev-btn"><i class="far fa-arrow-left"></i></a></li>
-                                    <li><a href="#"><span></span></a></li>
-                                    <li><a href="#"><span></span></a></li>
-                                    <li><a href="#"><span></span></a></li>
-                                    <li><a href="#"><span></span></a></li>
-                                    <li><a href="#"><span></span></a></li>
-                                    <li><a href="#" class="next-btn"><i class="far fa-arrow-right"></i></a></li>
-                                </ul>
+                            @endforeach
+                                {{ $blog->links() }}
                             </div>
                         </div>
-                    </div>
                     <div class="col-xl-4 col-lg-5">
                         <div class="sidebar-widget-area pl-lg-40">
                             <!--=== Search Widget ===-->
                             <div class="sidebar-widget search-widget mb-30 wow fadeInUp">
                                 <h5 class="widget-title">Search</h5>
-                                <form>
+                                <form method="get" action="{{ route('blog') }}">
+                                    @csrf
                                     <div class="form_group">
                                         <label><i class="far fa-search"></i></label>
                                         <input type="text" class="form_control" placeholder="Search" name="search" required>

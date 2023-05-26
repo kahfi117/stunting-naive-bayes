@@ -8,7 +8,7 @@
             <div class="primary-menu">
                 <!--=== Site Branding ===-->
                 <div class="site-branding">
-                    <a href="index.html" class="brand-logo"><img src="user/assets/images/logo/logo-black.png" alt="Site Logo"></a>
+                    <a href="index.html" class="brand-logo"><img src="user/assets/images/logo/logoo-putih.png" alt="Site Logo"></a>
                 </div>
                 <!--=== Nav Inner Menu ===-->
                 <div class="nav-menu">
@@ -34,7 +34,7 @@
                 <!--=== Nav right Item ===-->
                 <div class="nav-right-item d-flex align-items-center">
                     <div class="menu-button d-xl-block d-none">
-                        <a href="contact.html" class="main-btn btn-green">Check now<i class="far fa-angle-double-right"></i></a>
+                        <button class="main-btn btn-green" data-bs-toggle="modal" data-bs-target="#stuntingModal">Check now<i class="far fa-angle-double-right"></i></button>
                     </div>
                     <div class="navbar-toggler">
                         <span></span>
