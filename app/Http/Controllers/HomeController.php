@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\Kategori;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -33,10 +34,20 @@ class HomeController extends Controller
 
     public function detailBlog($slug){
         
-        $blog = Blog::where('slug', '=',$slug)->get();
-        dd($blog);
+        $blog = Blog::where('slug', '=',$slug)->first();
+        $kategori = Kategori::limit(5)->get();
+
+        $recent = Blog::limit(3)->get();
 
 
+        return view('user.blog_detail', compact('blog', 'kategori', 'recent'));
+
+    }
+
+    public function blogKategori($slug){
+        $kategori = Kategori::where('slug', '=', $slug)->first();
+        $blog = Blog::where('kategori_id', '=', $kategori->id)->paginate(5);
+        return view('user.blog', compact('blog'));
     }
 
     public function contact(){

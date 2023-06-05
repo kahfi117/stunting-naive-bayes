@@ -26,11 +26,21 @@
         
         <div class="row layout-top-spacing" id="cancel-row">
             
-            <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+            <div class="col-xl-12 col-Alg-12 col-sm-12  layout-spacing">
                 <div class="widget-content widget-content-area br-6">
-                    <button class="btn btn-secondary" data-toggle="modal" data-target="#newDataModal"> New Data</button>
-                    <button class="btn btn-success" data-toggle="modal" data-target="#newExportModal">Import Data Training</button>
-                    <button class="btn btn-danger" data-toggle="modal" data-target="#truncateModal">Bersihkan Data Traning</button>
+                    <div class="row">
+                        <div class="col-6">
+                            <button class="btn btn-secondary mt-2" data-toggle="modal" data-target="#newDataModal"> New Data</button>
+                            <button class="btn btn-success mt-2" data-toggle="modal" data-target="#newExportModal">Import Data Training</button>
+                            <button class="btn btn-danger mt-2" data-toggle="modal" data-target="#truncateModal">Bersihkan Data Traning</button>
+                        </div>
+                        @if ($training->count() != 0)
+                        <div class="col-6 text-right">
+                            <a href="#" class="btn btn-success mt-2">Uji Data Traning</a>
+                        </div>
+                        @endif
+
+                    </div>
                     
                     <div class="table-responsive mb-4 mt-4">
                         <table id="default-ordering" class="table style-3 table-hover" style="width:100%">

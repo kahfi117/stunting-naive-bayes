@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!--====== Title ======-->
-        <title>SISTEM INFORMASI PENCEGAHAN STUNTING</title>
+        <title>{{ env('APP_NAME') }}</title>
         <!--====== Favicon Icon ======-->
         <link rel="shortcut icon" href="{{  asset('user/assets/images/logo/logo.png')}}" type="image/png">
         <!--====== Flaticon css ======-->

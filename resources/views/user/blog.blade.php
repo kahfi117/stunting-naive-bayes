@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!--====== Title ======-->
-        <title>SISTEM INFORMASI PENCEGAHAN STUNTING</title>
+        <title>{{ env('APP_NAME') }}</title>
         <!--====== Favicon Icon ======-->
         <link rel="shortcut icon" href="{{  asset('user/assets/images/logo/logo.png')}}" type="image/png">
         <!--====== Flaticon css ======-->
@@ -41,15 +41,15 @@
         </div><!--====== End Preloader ======-->
         @include('user.layouts.navbar')
         <!--====== Start Breadcrumb Section ======-->
-        <section class="page-banner light-red-bg pt-170 pb-170 bg_cover" style="background-image: url(user/assets/images/bg/page-bg-1.jpg);">
+        <section class="page-banner light-red-bg pt-170 pb-170 bg_cover" style="background-image: url('{{ asset("user/assets/images/bg/page-bg-1.jpg") }}');">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-10">
                         <div class="page-banner-content text-center text-white">
-                            <h1 class="page-title">Blog Standard</h1>
+                            <h2 class="page-title">Belajar Stunting Itu Baik</h2>
                             <ul class="breadcrumb-link text-white">
-                                <li><a href="index.html">Home</a></li>
-                                <li class="active">Blog Standard</li>
+                                <li><a href="{{ route('home') }}">Home</a></li>
+                                <li class="active">Blog</li>
                             </ul>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                                         </ul>
                                     </div>
                                     <h3 class="title">
-                                        <a href="blog-details.html">
+                                        <a href="{{ route('detailBlog', $item->slug) }}">
                                             {!! $item->title !!}
                                         </a>
                                     </h3>

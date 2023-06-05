@@ -4,9 +4,11 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\NaiveBayesController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TrainingController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +27,12 @@ Route::controller(HomeController::class)->group(function() {
     Route::get('/blog', 'blog')->name('blog');
     Route::get('/contact', 'contact')->name('contact');
     Route::get('/blog/{slug}', 'detailBlog')->name('detailBlog');
+    Route::get('/blog/kategori/{slug}', 'blogKategori')->name('blogKategori');
+});
+
+Route::controller(NaiveBayesController::class)->group(function() {
+    Route::post('/cek-status-stunting', 'cekStunting')->name('cekStunting');
+    Route::get('/cek-nilai-probailitas', 'calculateProbabilities')->name('probabilitasStunting');
 });
 
 
