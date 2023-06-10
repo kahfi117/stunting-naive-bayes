@@ -128,6 +128,7 @@
             </li>
             @endif
 
+            @if( Auth::user()->role == 'admin')
             <li class="menu">
                 <a href="{{ route('user.index') }}" aria-expanded="{{Request::is('admin/user*') ? 'true' : ''}}" class="dropdown-toggle">
                     <div class="">
@@ -135,6 +136,7 @@
                     </div>
                 </a>
             </li>
+            @endif
 
             <li class="menu">
                 <a href="{{ route('data.testing') }}" aria-expanded="false" class="dropdown-toggle">
