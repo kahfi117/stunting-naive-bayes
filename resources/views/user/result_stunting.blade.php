@@ -81,7 +81,7 @@
                                             </div>
                                             <div class="text">
                                                 <h5 class="title">Horee! {{ $nama }} tumbuh tinggi dan sehat seperti seharusnya, tidak ada kekhawatiran tentang stunting.</h5>
-                                                <p>Hasil Sistem Mengatakan : {{ $predicted }}</p>
+                                                <p style="text-transform: capitalize">Hasil Sistem Mengatakan : {{ $predicted }}</p>
                                                 <span class="line"></span>
                                             </div>
                                         </div>

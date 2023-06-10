@@ -35,6 +35,7 @@ Route::controller(HomeController::class)->group(function() {
 Route::controller(NaiveBayesController::class)->group(function() {
     Route::post('/cek-status-stunting', 'cekStunting')->name('cekStunting');
     Route::get('/cek-nilai-probailitas', 'calculateProbabilities')->name('probabilitasStunting')->middleware('auth');
+    Route::get('/admin/uji-massal', 'ujiMassal')->name('ujiMassalStunting')->middleware('auth');
 });
 
 Route::controller(LoginController::class)->group(function() {

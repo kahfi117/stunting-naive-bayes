@@ -16,7 +16,7 @@ class TrainingController extends Controller
 {
 
     public function index(){
-        $training = Training::orderBy('nama', 'ASC')->get();
+        $training = Training::orderBy('id', 'ASC')->get();
 
         return view('admin.training.index', compact('training'));
     }

@@ -30,16 +30,8 @@
                 <div class="widget-content widget-content-area br-6">
                     <div class="row">
                         <div class="col-12">
-                            <button class="btn btn-secondary mt-2" data-toggle="modal" data-target="#newDataModal"> New Data</button>
-                            <button class="btn btn-success mt-2" data-toggle="modal" data-target="#newExportModal">Import Data Training</button>
-                            <button class="btn btn-danger mt-2" data-toggle="modal" data-target="#truncateModal">Bersihkan Data Traning</button>
+                            <h4 class="title">Hasil Uji Massal</h4>
                         </div>
-                        {{-- @if ($training->count() != 0)
-                        <div class="col-6 text-right">
-                            <a href="#" class="btn btn-success mt-2">Uji Data Traning</a>
-                        </div>
-                        @endif --}}
-
                     </div>
                     
                     <div class="table-responsive mb-4 mt-4">
@@ -52,23 +44,23 @@
                                     <th>BB</th>
                                     <th>TB</th>
                                     <th>LLA</th>
-                                    <th>Status</th>
-                                    <th class="text-center">Action</th>
+                                    <th>Status Awal</th>
+                                    <th>Status Uji</th>
                                 </tr>
                             </thead>
                             @php
                                 $no = 1;
                             @endphp
                             <tbody>
-                                @forelse ($training as $item)
+                                @foreach ($predictedResults as $index => $predicted)
                                 <tr>
-                                    <td>{{ $no++ }}</td>
-                                    <td>{{ $item->nama }}</td>
-                                    <td class="text-center">{{ $item->umur }}</td>
-                                    <td>{{ $item->berat_badan }}</td>
-                                    <td>{{ $item->tinggi_badan }}</td>
-                                    <td>{{ $item->lingkar_atas }}</td>
-                                    @if ($item->status == 'absence')
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $dataUjiMassal[$index]['nama'] }}</td>
+                                    <td>{{ $dataUjiMassal[$index]['umur'] }}</td>
+                                    <td>{{ $dataUjiMassal[$index]['berat_badan'] }}</td>
+                                    <td>{{ $dataUjiMassal[$index]['tinggi_badan'] }}</td>
+                                    <td>{{ $dataUjiMassal[$index]['lingkar_atas'] }}</td>
+                                    @if ($dataUjiMassal[$index]['status'] == 'absence')
                                     <td>
                                         <span class="badge badge-primary"> Absence </span>
                                     </td>
@@ -76,18 +68,18 @@
                                     <td>
                                         <span class="badge badge-danger"> Presence </span>
                                     </td>
-                                        
                                     @endif
-                                    <td class="text-center">
-                                        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modalEdit_{{$item->id}}">Edit</button>
-                                        <button class="btn btn-danger" data-toggle="modal" data-target="#modalDelete_{{$item->id}}">Delete</button>
+                                    @if ($predicted == 'absence')
+                                    <td>
+                                        <span class="badge badge-primary"> Absence </span>
                                     </td>
+                                    @else
+                                    <td>
+                                        <span class="badge badge-danger"> Presence </span>
+                                    </td>
+                                    @endif
                                 </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="8" class="text-center">NO DATA KATEGORI</td>
-                                    </tr>
-                                @endforelse
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -108,7 +100,6 @@
 
         </div>
 
-        @include('admin.training.modal')
 
         </div>
             <div class="footer-wrapper">
@@ -152,7 +143,7 @@
             },
             "order": [[ 0, "asc" ]],
             "stripeClasses": [],
-            "lengthMenu": [ 10, 20, 50, 100],
+            "lengthMenu": [ 10, 20, 50, 100, 200],
             "pageLength": 10,
             drawCallback: function () { $('.dataTables_paginate > .pagination').addClass(' pagination-style-13 pagination-bordered mb-5'); }
 	    } );

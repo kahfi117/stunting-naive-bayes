@@ -69,8 +69,6 @@ class NaiveBayesController extends Controller
             Alert::toast('Pastikan Mengisi Data Training Terlebih Dahulu', 'error');
             return redirect()->back();
         }
-
-        
     }
 
     public function calculateProbabilities()
@@ -280,5 +278,42 @@ class NaiveBayesController extends Controller
             'peluangAbsenceLlaCat2', 'peluangPresenceLlaCat2',
         ));
         
+    }
+
+    public function ujiMassal()
+    {
+        $dataTraining = DB::table('trainings')->get();
+
+        $samples = [];
+        $labels = [];
+        foreach ($dataTraining as $data) {
+            $samples[] = [$data->umur, $data->berat_badan, $data->tinggi_badan, $data->lingkar_atas];
+            $labels[] = $data->status;
+        }
+
+        $dataUjiMassal = Training::all();
+
+
+        foreach ($dataUjiMassal as $dataUji) {
+            // Mengelompokkan atribut data training
+            $samples = [];
+            $labels = [];
+            foreach ($dataTraining as $data) {
+                $samples[] = [$data->umur, $data->berat_badan, $data->tinggi_badan, $data->lingkar_atas];
+                $labels[] = $data->status;
+            }
+
+
+            // Membuat model Naive Bayes dan melatihnya dengan data training
+            $classifier = new NaiveBayes();
+            $dataset = new ArrayDataset($samples, $labels);
+            $classifier->train($dataset->getSamples(), $dataset->getTargets());
+
+            // Melakukan prediksi kelas untuk data uji
+            $predicted = $classifier->predict([$dataUji['umur'], $dataUji['berat_badan'], $dataUji['tinggi_badan'], $dataUji['lingkar_atas']]);
+            $predictedResults[] = $predicted;
+        }
+
+        return view('admin.training.hasil_training', compact('predictedResults', 'dataUjiMassal'));
     }
 }
