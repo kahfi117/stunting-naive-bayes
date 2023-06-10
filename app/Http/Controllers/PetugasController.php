@@ -94,8 +94,13 @@ class PetugasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $user->delete();
+        Alert::toast('Berhasil Menghapus User', 'success');
+
+        return redirect()->back();
     }
 }

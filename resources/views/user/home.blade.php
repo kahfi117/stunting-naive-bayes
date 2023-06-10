@@ -472,8 +472,8 @@
                                         <li><span><a href="#"><i class="far fa-user"></i> {{ $item->user->name }}</a></span></li>
                                     </ul>
                                 </div>
-                                <h4 class="title"><a href="blog-details.html">{!! $item->title !!}</a></h4>
-                                    <a href="blog-details.html" class="btn-link">Read more <i class="far fa-angle-double-right"></i></a>
+                                <h4 class="title"><a href="{{ route('detailBlog', $item->slug) }}">{!! $item->title !!}</a></h4>
+                                    <a href="{{ route('detailBlog', $item->slug) }}" class="btn-link">Read more <i class="far fa-angle-double-right"></i></a>
                             </div>
                         </div>
                     </div>

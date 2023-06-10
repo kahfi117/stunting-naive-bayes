@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -8,7 +9,8 @@ use App\Http\Controllers\NaiveBayesController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TrainingController;
-
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TestingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,14 +34,19 @@ Route::controller(HomeController::class)->group(function() {
 
 Route::controller(NaiveBayesController::class)->group(function() {
     Route::post('/cek-status-stunting', 'cekStunting')->name('cekStunting');
-    Route::get('/cek-nilai-probailitas', 'calculateProbabilities')->name('probabilitasStunting');
+    Route::get('/cek-nilai-probailitas', 'calculateProbabilities')->name('probabilitasStunting')->middleware('auth');
+});
+
+Route::controller(LoginController::class)->group(function() {
+    Route::get('/login', 'index')->name('login')->middleware('guest');
+    Route::post('/login', 'authenticate')->name('proses.login');
+    Route::post('/logout', 'logout')->name('logout')->middleware('auth');
 });
 
 
-Route::prefix('admin')->group(function() {
-    Route::get('/', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+Route::prefix('admin')->middleware('auth')->group(function() {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/data-testing-riwayat', [TestingController::class, 'index'])->name('data.testing');
 
     Route::post('/blog/image/store', [BaseController::class, 'image'])->name('blog.imageStore');
     Route::resource('/blog', BlogController::class);

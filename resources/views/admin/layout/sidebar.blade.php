@@ -104,16 +104,6 @@
                 </ul>
             </li>
 
-
-            <li class="menu">
-                <a href="{{ route('home') }}" aria-expanded="false" class="dropdown-toggle">
-                    <div class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-target"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
-                        <span>Font Icons</span>
-                    </div>
-                </a>
-            </li>
-
             <li class="menu">
                 <a href="{{ route('training.index') }}" aria-expanded="{{Request::is('admin/training*') ? 'true' : ''}}" class="dropdown-toggle">
                     <div class="">
@@ -122,6 +112,21 @@
                     </div>
                 </a>
             </li>
+
+            @php
+                use App\Models\Training;
+            @endphp
+
+            @if( Training::count() != null)
+            <li class="menu">
+                <a href="{{ route('probabilitasStunting') }}" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-target"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+                        <span>Probabilitas</span>
+                    </div>
+                </a>
+            </li>
+            @endif
 
             <li class="menu">
                 <a href="{{ route('user.index') }}" aria-expanded="{{Request::is('admin/user*') ? 'true' : ''}}" class="dropdown-toggle">
@@ -132,54 +137,11 @@
             </li>
 
             <li class="menu">
-                <a href="widgets.html" aria-expanded="false" class="dropdown-toggle">
+                <a href="{{ route('data.testing') }}" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>                        <span>Riwayat Cek Stunting</span>
                     </div>
                 </a>
-            </li>
-
-            <li class="menu menu-heading">
-                <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg><span>EXTRA</span></div>
-            </li>
-
-
-            <li class="menu">
-                <a href="#authentication" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                    <div class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                        <span>Authentication</span>
-                    </div>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </div>
-                </a>
-                <ul class="collapse submenu list-unstyled" id="authentication" data-parent="#accordionExample">
-                    <li>
-                        <a href="auth_login_boxed.html"> Login Boxed </a>
-                    </li>
-                    <li>
-                        <a href="auth_register_boxed.html"> Register Boxed </a>
-                    </li>
-                    <li>
-                        <a href="auth_lockscreen_boxed.html"> Unlock Boxed </a>
-                    </li>
-                    <li>
-                        <a href="auth_pass_recovery_boxed.html"> Recover ID Boxed </a>
-                    </li>
-                    <li>
-                        <a href="auth_login.html"> Login Cover </a>
-                    </li>
-                    <li>
-                        <a href="auth_register.html"> Register Cover </a>
-                    </li>
-                    <li>
-                        <a href="auth_lockscreen.html"> Unlock Cover </a>
-                    </li>
-                    <li>
-                        <a href="auth_pass_recovery.html"> Recover ID Cover </a>
-                    </li>
-                </ul>
             </li>
 
             

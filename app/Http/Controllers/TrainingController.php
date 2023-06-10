@@ -37,7 +37,10 @@ class TrainingController extends Controller
         return redirect()->back();
     }
 
-    public function update(Training $training, Request $request){
+    public function update(Request $request, $id){
+
+        $training = Training::findOrFail($id);
+
         $training->nama = $request->nama;
         $training->umur = $request->umur;
         $training->berat_badan = $request->berat_badan;
@@ -46,7 +49,7 @@ class TrainingController extends Controller
         $training->status = $request->status;
         $training->update();
 
-        Alert::toast('Berhasil Menambahkan Data Baru', 'success');
+        Alert::toast('Berhasil Mengubah Data', 'success');
         
         return redirect()->back();
     }

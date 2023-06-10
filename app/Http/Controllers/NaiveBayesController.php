@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Training;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Phpml\Classification\NaiveBayes;
@@ -51,15 +52,14 @@ class NaiveBayesController extends Controller
             'bb' => $bb,
             'tb' => $tb,
             'lla' => $lla,
-            'status' => $predicted
+            'status' => $predicted,
+            'created_at' => Carbon::now()
         ]);
 
         // Menghitung akurasi model dengan data latih
         $accuracy = Accuracy::score($predictions, $dataset->getTargets());
 
-        dd('accuracy => '. $accuracy, 'Prediksi => '.$predicted);
-
-        return view('naive_bayes.result', compact('nama', 'predicted', 'accuracy'));
+        return view('user.result_stunting', compact('nama', 'predicted', 'accuracy'));
 
     }
     
@@ -75,6 +75,11 @@ class NaiveBayesController extends Controller
 
     public function calculateProbabilities()
     {
+
+        if(Training::count() == 0){
+            Alert::toast('Pastikan Mengisi Data Training Terlebih Dahulu', 'error');
+            return redirect()->back();
+        }
 
         $trainingData = Training::all();
         $totalData = $trainingData->count();
@@ -110,14 +115,14 @@ class NaiveBayesController extends Controller
                         ->toArray();
 
         // Nilai Peluang Umur
-        $peluangAbsenceUmurCat1 = $umurCat1['absence'] / $statusAbsence; 
-        $peluangPresenceUmurCat1 = $umurCat1['presence'] / $statusPresence; 
+        $peluangAbsenceUmurCat1 = isset($umurCat1['absence']) ? $umurCat1['absence'] / $statusAbsence : 0; 
+        $peluangPresenceUmurCat1 = isset($umurCat1['presence']) ? $umurCat1['presence'] / $statusPresence : 0; 
 
-        $peluangAbsenceUmurCat2 = $umurCat2['absence'] / $statusAbsence; 
-        $peluangPresenceUmurCat2 = $umurCat2['presence'] / $statusPresence; 
+        $peluangAbsenceUmurCat2 = isset($umurCat2['absence']) ? $umurCat2['absence'] / $statusAbsence : 0; 
+        $peluangPresenceUmurCat2 = isset($umurCat2['presence']) ? $umurCat2['presence'] / $statusPresence : 0; 
 
-        $peluangAbsenceUmurCat3 = $umurCat3['absence'] / $statusAbsence; 
-        $peluangPresenceUmurCat3 = $umurCat3['presence'] / $statusPresence; 
+        $peluangAbsenceUmurCat3 = isset($umurCat3['absence']) ? $umurCat3['absence'] / $statusAbsence : 0; 
+        $peluangPresenceUmurCat3 = isset($umurCat3['presence']) ? $umurCat3['presence'] / $statusPresence : 0; 
 
         // Attribut Berat Badan
         $bbCat1 = Training::where('berat_badan', '>=', 0)
@@ -156,20 +161,20 @@ class NaiveBayesController extends Controller
                         ->toArray();
             
         // Nilai Peluang Berat Badan
-        $peluangAbsenceBbCat1 = $bbCat1['absence'] / $statusAbsence; 
-        $peluangPresenceBbCat1 = $bbCat1['presence'] / $statusPresence;
+        $peluangAbsenceBbCat1 = isset($bbCat1['absence']) ? $bbCat1['absence'] / $statusAbsence : 0; 
+        $peluangPresenceBbCat1 = isset($bbCat1['presence']) ? $bbCat1['presence'] / $statusPresence : 0;
 
-        $peluangAbsenceBbCat2 = $bbCat2['absence'] / $statusAbsence; 
-        $peluangPresenceBbCat2 = $bbCat2['presence'] / $statusPresence; 
+        $peluangAbsenceBbCat2 = isset($bbCat2['absence']) ? $bbCat2['absence'] / $statusAbsence : 0; 
+        $peluangPresenceBbCat2 = isset($bbCat2['presence']) ? $bbCat2['presence'] / $statusPresence : 0; 
 
-        $peluangAbsenceBbCat3 = $bbCat3['absence'] / $statusAbsence; 
-        $peluangPresenceBbCat3 = $bbCat3['presence'] / $statusPresence; 
+        $peluangAbsenceBbCat3 = isset($bbCat3['absence']) ? $bbCat3['absence'] / $statusAbsence : 0; 
+        $peluangPresenceBbCat3 = isset($bbCat3['presence']) ? $bbCat3['presence'] / $statusPresence : 0; 
     
-        $peluangAbsenceBbCat4 = $bbCat4['absence'] / $statusAbsence; 
-        $peluangPresenceBbCat4 = $bbCat4['presence'] ?? 0 / $statusPresence; 
+        $peluangAbsenceBbCat4 = isset($bbCat4['absence']) ? $bbCat4['absence'] / $statusAbsence : 0; 
+        $peluangPresenceBbCat4 = isset($bbCat4['presence']) ? $bbCat4['presence'] / $statusPresence : 0; 
 
-        $peluangAbsenceBbCat5 = $bbCat5['absence'] ?? 0 / $statusAbsence; 
-        $peluangPresenceBbCat5 = $bbCat5['presence'] ?? 0 / $statusPresence; 
+        $peluangAbsenceBbCat5 = isset($bbCat5['absence']) ? $bbCat5['absence'] / $statusAbsence : 0; 
+        $peluangPresenceBbCat5 = isset($bbCat5['presence']) ?  $bbCat5['presence'] / $statusPresence : 0; 
 
 
         //Attribut Tinggi Badan
@@ -209,20 +214,20 @@ class NaiveBayesController extends Controller
                         ->toArray();
 
         // Nilai Peluang Berat Badan
-        $peluangAbsenceTbCat1 = $tbCat1['absence'] ?? 0 / $statusAbsence; 
-        $peluangPresenceTbCat1 = $tbCat1['presence'] ?? 0 / $statusPresence;
+        $peluangAbsenceTbCat1 = isset($tbCat1['absence']) ? $tbCat1['absence'] / $statusAbsence : 0; 
+        $peluangPresenceTbCat1 = isset($tbCat1['presence']) ? $tbCat1['presence'] / $statusPresence : 0;
 
-        $peluangAbsenceTbCat2 = $tbCat2['absence'] ?? 0 / $statusAbsence; 
-        $peluangPresenceTbCat2 = $tbCat2['presence'] ?? 0/ $statusPresence; 
+        $peluangAbsenceTbCat2 = isset($tbCat2['absence']) ? $tbCat2['absence'] / $statusAbsence : 0; 
+        $peluangPresenceTbCat2 = isset($tbCat2['presence']) ? $tbCat2['presence'] / $statusPresence : 0; 
 
-        $peluangAbsenceTbCat3 = $tbCat3['absence'] / $statusAbsence; 
-        $peluangPresenceTbCat3 = $tbCat3['presence'] / $statusPresence; 
+        $peluangAbsenceTbCat3 = isset($tbCat3['absence']) ? $tbCat3['absence'] / $statusAbsence : 0; 
+        $peluangPresenceTbCat3 = isset($tbCat3['presence']) ? $tbCat3['presence'] / $statusPresence : 0; 
     
-        $peluangAbsenceTbCat4 = $tbCat4['absence'] / $statusAbsence; 
-        $peluangPresenceTbCat4 = $tbCat4['presence'] / $statusPresence; 
+        $peluangAbsenceTbCat4 = isset($tbCat4['absence']) ? $tbCat4['absence'] / $statusAbsence : 0; 
+        $peluangPresenceTbCat4 = isset($tbCat4['presence']) ? $tbCat4['presence'] / $statusPresence : 0; 
 
-        $peluangAbsenceTbCat5 = $tbCat5['absence'] / $statusAbsence; 
-        $peluangPresenceTbCat5 = $tbCat5['presence'] / $statusPresence;
+        $peluangAbsenceTbCat5 = isset($tbCat5['absence']) ? $tbCat5['absence'] / $statusAbsence : 0; 
+        $peluangPresenceTbCat5 = isset($tbCat5['presence']) ? $tbCat5['presence'] / $statusPresence : 0;
 
                         
         // Lingkar Atas
@@ -241,11 +246,11 @@ class NaiveBayesController extends Controller
                         ->toArray();
 
         // Nilai Peluang Lingkar Atas
-        $peluangAbsenceLlaCat1 = $llaCat1['absence'] / $statusAbsence; 
-        $peluangPresenceLlaCat1 = $llaCat1['presence'] / $statusPresence;
+        $peluangAbsenceLlaCat1 = isset($llaCat1['absence']) ? $llaCat1['absence'] / $statusAbsence : 0; 
+        $peluangPresenceLlaCat1 = isset($llaCat1['presence']) ? $llaCat1['presence'] / $statusPresence : 0;
         
-        $peluangAbsenceLlaCat2 = $llaCat2['absence'] / $statusAbsence; 
-        $peluangPresenceLlaCat2 = $llaCat2['presence'] / $statusPresence;
+        $peluangAbsenceLlaCat2 = isset($llaCat2['absence']) ? $llaCat2['absence'] / $statusAbsence : 0; 
+        $peluangPresenceLlaCat2 = isset($llaCat2['presence']) ? $llaCat2['presence'] / $statusPresence : 0;
 
             
 

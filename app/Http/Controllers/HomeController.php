@@ -19,17 +19,21 @@ class HomeController extends Controller
 
         $search = $request->search;
 
+        $kategori = Kategori::limit(5)->get();
+
+        $recent = Blog::limit(3)->get();
+
         if ($search != null) {
             # code...
             $blog = Blog::where('title', 'like', '%' . $search . '%')
                     ->orWhere('konten', 'like', '%' . $search . '%')
-                    ->paginate('2');
+                    ->paginate(5);
         } else {
 
-            $blog = Blog::paginate(2);
+            $blog = Blog::paginate(5);
         }
         
-        return view('user.blog', compact('blog'));
+        return view('user.blog', compact('blog', 'kategori', 'recent', 'search'));
     }
 
     public function detailBlog($slug){
@@ -51,7 +55,7 @@ class HomeController extends Controller
     }
 
     public function contact(){
-        // 
+        return view('user.contact');
     }
 
 }

@@ -30,6 +30,15 @@
         <link rel="stylesheet" href="{{  asset('user/assets/css/default.css')}}">
         <!--====== Style css ======-->
         <link rel="stylesheet" href="{{  asset('user/assets/css/style.css')}}">
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+        <style>
+            #map { height: 700px; }
+        </style>
+
+
     </head>
     <body>
         <!--====== Start Preloader ======-->
@@ -42,84 +51,77 @@
 
         @include('user.layouts.navbar')
 
-        {{-- <!--====== Start Breadcrumb Section ======-->
+        <!--====== Start Breadcrumb Section ======-->
         <section class="page-banner light-red-bg pt-170 pb-170 bg_cover" style="background-image: url(assets/images/bg/page-bg-1.jpg);">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-10">
                         <div class="page-banner-content text-center text-white">
-                            <h1 class="page-title">Blog Details</h1>
+                            <h1 class="page-title">Contact Us</h1>
                             <ul class="breadcrumb-link text-white">
                                 <li><a href="index.html">Home</a></li>
-                                <li class="active">Blog Details</li>
+                                <li class="active">Contact Us</li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-        </section><!--====== End Breadcrumb Section ======--> --}}
+        </section><!--====== End Breadcrumb Section ======-->
 
-        <!--====== Start Blog Details Section ======-->
-        <section class="blog-details-section pt-100 pb-60">
+        <!--====== Start Contact Section ======-->
+        <section class="contact-bg-section bg_cover pt-100 pb-50" style="background-image: url(assets/images/bg/contact-bg-1.png);">
             <div class="container">
-                <div class="row">
-                    <div class="col-xl-8 col-lg-7">
-                        <div class="blog-details-wrapper">
-                            <div class="blog-post mb-60 wow fadeInUp">
-                                <div class="post-thumbnail">
-                                    <img src="{{ url('images/'.$blog->tumbnail) }}" alt="Blog Image">
+                <div class="row align-items-center">
+                    <div class="col-xl-12 col-lg-12">
+                        <div class="contact-content-box mb-50">
+                            <div class="section-title mb-45 wow fadeInUp">
+                                <span class="sub-title"><span class="number"></span>Contact Us</span>
+                                <h2>Ready to <span class="thin">Better Healthies</span></h2>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="contact-icon-box mb-50 wow fadeInDown">
+                                        <div class="icon">
+                                            <i class="fal fa-map-marker-alt"></i>
+                                        </div>
+                                        <div class="text">
+                                            <h4 class="title">Locations</h4>
+                                            <p>Jl. Poros Bulukumba-Sinjai, Sangianseri, 
+                                                Kec. Sinjai Sel., Kabupaten Sinjai, 
+                                                Sulawesi Selatan 92661</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="post-meta">
-                                    <ul>
-                                        <li><span><a href="#"><i class="far fa-calendar-alt"></i> {{  date('M d,Y', strtotime($blog->updated_at)) }}</a></span></li>
-                                        <li><span><a href="#"><i class="far fa-bars"></i> {{ $blog->kategori->nama }}</a></span></li>
-                                    </ul>
-                                </div>
-                                <div class="main-post"> 
-                                    <div class="entry-content">
-                                        <h3 class="title">{!! $blog->title !!}</h3>
-                                        {!! $blog->konten !!}
+                                <div class="col-md-6">
+                                    <div class="contact-icon-box mb-50 wow fadeInDown">
+                                        <div class="icon">
+                                            <i class="fal fa-phone"></i>
+                                        </div>
+                                        <div class="text">
+                                            <h4 class="title">Hotline</h4>
+                                            <p><a href="tel:+62(0482) 2424528">tel:(0482) 2424528</a></p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-lg-5">
-                        <div class="sidebar-widget-area pl-lg-40">
-                            <!--=== Category Widget ===-->
-                            <div class="sidebar-widget category-widget mb-30 wow fadeInUp">
-                                <h5 class="widget-title">Category</h5>
-                                <ul class="category-nav">
-                                    @forelse ($kategori as $kat)
-                                    <li><a href="{{ route('blogKategori', $kat->slug) }}">{{ $kat->nama }}<i class="far fa-arrow-right"></i></a></li>
-                                    @empty
-                                        
-                                    @endforelse
-                                </ul>
-                            </div>
-                            <!--=== Recent Post Widget ===-->
-                            <div class="sidebar-widget recent-post-widget mb-40 wow fadeInUp">
-                                <h5 class="widget-title">Recent Blog</h5>
-                                <ul class="recent-post-list">
-                                    @foreach ($recent as $rt)   
-                                    <li class="post-thumbnail-content">
-                                        <img src="{{ url('images/'.$rt->tumbnail) }}" alt="post thumb">
-                                        <div class="post-title-date">
-                                            <h5><a href="blog-details.html">{{$rt->title}}</a></h5>
-                                            <span class="posted-on"><i class="far fa-calendar-alt"></i><a href="#">{{ date('M d,Y', strtotime($rt->updated_at)) }}</a></span>
-                                        </div>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
-        </section><!--====== End Blog Details Section ======-->
+        </section><!--====== End Contact Section ======-->
+        <!--====== Start Contact Map Section ======-->
+        <section class="contact-page-map pb-100 wow fadeInUp">
+            <div class="container-fluid">
+                <!--=== Map Box ===-->
+                <div id="map"></div>
+
+            </div>
+        </section>
+        <!--====== End Contact Map Section ======-->
+        
         @include('user.modal')
-        <!--====== Start Footer ======-->
-        @include('user.layouts.footer')<!--====== End Footer ======-->
+
+        @include('user.layouts.footer')
         <!--====== Back To Top  ======-->
         <a href="#" class="back-to-top" ><i class="far fa-angle-up"></i></a>
         <!--====== Jquery js ======-->
@@ -148,5 +150,20 @@
         <script src="{{  asset('user/assets/vendor/wow.min.js')}}"></script>
         <!--====== Main js ======-->
         <script src="{{  asset('user/assets/js/theme.js')}}"></script>
+
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+        <script>
+            var map = L.map('map').setView([-5.2576671, 120.1571321], 13);
+
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            L.marker([-5.2576671, 120.1571321]).addTo(map)
+                .bindPopup('PUSKESMAS SAMAENRE')
+                .openPopup();
+         </script>
+         
     </body>
 </html>

@@ -61,7 +61,7 @@
                     <div class="form-row">
                         <div class="col-md-12 mb-4">
                             <label for="age">Umur</label>
-                            <input type="text" class="form-control" id="age" placeholder="" name="umur" value="" required>
+                            <input type="number" class="form-control" id="age" placeholder="" name="umur" value="" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -73,7 +73,7 @@
                     <div class="form-row">
                         <div class="col-md-12 mb-4">
                             <label for="berat_badan">Berat Badan</label>
-                            <input type="text" class="form-control" id="berat_badan" placeholder="" name="berat_badan" value="" required>
+                            <input type="number" step="0.1" class="form-control" id="berat_badan" placeholder="" name="berat_badan" value="" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -85,7 +85,7 @@
                     <div class="form-row">
                         <div class="col-md-12 mb-4">
                             <label for="tingi_badan">Tinggi Badan</label>
-                            <input type="text" class="form-control" id="tingi_badan" placeholder="" name="tinggi_badan" value="" required>
+                            <input type="number" step="0.1" class="form-control" id="tingi_badan" placeholder="" name="tinggi_badan" value="" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -97,7 +97,7 @@
                     <div class="form-row">
                         <div class="col-md-12 mb-4">
                             <label for="lla">Linkar Lengan Atas</label>
-                            <input type="text" class="form-control" id="lla" placeholder="" name="lingkar_atas" value="" required>
+                            <input type="number" step="0.1" class="form-control" id="lla" placeholder="" name="lingkar_atas" value="" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -109,7 +109,7 @@
                     <div class="form-row">
                         <div class="col-md-12 mb-4">
                             <label for="status">Nama Kategori</label>
-                            <select class="custom-select mb-4" name="status" id="status">
+                            <select class="custom-select mb-4" name="status" id="status" required>
                                 <option selected>Open this select menu</option>
                                 <option value="absence">Absence</option>
                                 <option value="presence">Presence</option>
@@ -140,7 +140,7 @@
                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
             </div>
-            <form action="{{route('training.update', $item->id)}}" method="post">
+            <form action="{{route('training.update', $item->id)}}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
                 
@@ -160,7 +160,7 @@
                     <div class="form-row">
                         <div class="col-md-12 mb-4">
                             <label for="age">Umur</label>
-                            <input type="text" class="form-control" id="age" placeholder="" name="umur" value="{{ $item->umur }}" required>
+                            <input type="number" class="form-control" id="age" placeholder="" name="umur" value="{{ $item->umur }}" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -172,7 +172,7 @@
                     <div class="form-row">
                         <div class="col-md-12 mb-4">
                             <label for="berat_badan">Berat Badan</label>
-                            <input type="text" class="form-control" id="berat_badan" placeholder="" name="berat_badan" value="{{ $item->berat_badan }}" required>
+                            <input type="number" step="0.1" class="form-control" id="berat_badan" placeholder="" name="berat_badan" value="{{ $item->berat_badan }}" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -184,7 +184,7 @@
                     <div class="form-row">
                         <div class="col-md-12 mb-4">
                             <label for="tingi_badan">Tinggi Badan</label>
-                            <input type="text" class="form-control" id="tingi_badan" placeholder="" name="tinggi_badan" value="{{ $item->tinggi_badan }}" required>
+                            <input type="number" step="0.1" class="form-control" id="tingi_badan" placeholder="" name="tinggi_badan" value="{{ $item->tinggi_badan }}" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -196,7 +196,7 @@
                     <div class="form-row">
                         <div class="col-md-12 mb-4">
                             <label for="lla">Lingkar Lengan Atas</label>
-                            <input type="text" class="form-control" id="lla" placeholder="" name="lingkar_atas" value="{{ $item->lingkar_atas }}" required>
+                            <input type="number" step="0.1" class="form-control" id="lla" placeholder="" name="lingkar_atas" value="{{ $item->lingkar_atas }}" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -207,11 +207,15 @@
                     </div>
                     <div class="form-row">
                         <div class="col-md-12 mb-4">
-                            <label for="status">Nama Kategori</label>
+                            <label for="status">Status</label>
                             <select class="custom-select mb-4" name="status" id="status" required>
-                                <option selected>Open this select menu</option>
-                                <option value="absence">Absence</option>
-                                <option value="presence">Presence</option>
+                                @if ($item->status == 'absence')
+                                    <option value="absence" selected>Absence</option>
+                                    <option value="presence">Presence</option>
+                                @else
+                                    <option value="absence">Absence</option>
+                                    <option value="presence" selected>Presence</option>
+                                @endif
                             </select>
                         </div>
                     </div>
