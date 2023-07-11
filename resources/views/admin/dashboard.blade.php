@@ -32,9 +32,6 @@
             
             <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                 <div class="widget widget-chart-two">
-                    <div class="widget-heading">
-                        <h5 class="">Sales by Category</h5>
-                    </div>
                     <div class="widget-content">
                         <iframe style="height:550px; width:100%; border: none;" src="https://databoks.katadata.co.id/datapublishembed/148655/angka-stunting-indonesia-turun-pada-2022-rekor-terbaik-dekade-ini"></iframe>
                     </div>
@@ -53,12 +50,6 @@
 
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                 <div class="widget widget-chart-one">
-                    <div class="widget-heading">
-                        <h5 class="">Revenue</h5>
-                        <ul class="tabs tab-pills">
-                            <li><a href="javascript:void(0);" id="tb_1" class="tabmenu">Monthly</a></li>
-                        </ul>
-                    </div>
 
                     <div class="widget-content">
                         <iframe style="height:580px; width:100%; border: none;" src="https://databoks.katadata.co.id/datapublishembed/152675/ini-sejumlah-penyebab-utama-anak-mengalami-stunting-menurut-survei-litbang-kompas"></iframe>
@@ -68,12 +59,6 @@
 
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                 <div class="widget widget-chart-one">
-                    <div class="widget-heading">
-                        <h5 class="">Revenue</h5>
-                        <ul class="tabs tab-pills">
-                            <li><a href="javascript:void(0);" id="tb_1" class="tabmenu">Monthly</a></li>
-                        </ul>
-                    </div>
 
                     <div class="widget-content">
                         <iframe style="height:600px; width:100%; border: none;" src="https://databoks.katadata.co.id/datapublishembed/149622/prevalensi-balita-stunting-sulawesi-selatan-capai-272-pada-2022-berikut-sebaran-wilayahnya">

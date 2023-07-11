@@ -54,11 +54,11 @@
                                     <td>{{ $item->lla }}</td>
                                     @if ($item->status == 'absence')
                                     <td>
-                                        <span class="badge badge-primary"> Absence </span>
+                                        <span class="badge badge-primary"> Beresiko </span>
                                     </td>
                                     @else
                                     <td>
-                                        <span class="badge badge-danger"> Presence </span>
+                                        <span class="badge badge-danger"> Tidak Beresiko </span>
                                     </td>
                                         
                                     @endif
@@ -73,9 +73,13 @@
                             <tfoot>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Tag</th>
-                                    <th>Slug</th>
-                                    <th class="invisible"></th>
+                                    <th>Nama</th>
+                                    <th>Umur(bulan)</th>
+                                    <th>BB</th>
+                                    <th>TB</th>
+                                    <th>LLA</th>
+                                    <th>Status</th>
+                                    <th>Dibuat</th>
                                 </tr>
                             </tfoot>
                         </table>

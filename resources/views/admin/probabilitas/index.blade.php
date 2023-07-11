@@ -113,6 +113,11 @@
                         
                 </div>
             </div>
+            <div class="col-xl-12 col-Alg-12 col-sm-12  layout-spacing">
+                <div class="widget-content widget-content-area br-12">
+                    <iframe width="100%" height="500" src='https://dbdiagram.io/embed/64644e6bdca9fb07c438c975'> </iframe> 
+                </div>
+            </div>
 
         </div>
 

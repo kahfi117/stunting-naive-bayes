@@ -25,7 +25,7 @@
                 </div>
                 <div class="form-row">
                     <div class="col-md-12 mb-4">
-                        <label for="age">Umur</label>
+                        <label for="age">Umur(Bulan)</label>
                         <input type="number" class="form-control" id="age" placeholder="" name="umur" value="" required>
                         <div class="valid-feedback">
                             Looks good!
@@ -37,7 +37,7 @@
                 </div>
                 <div class="form-row">
                     <div class="col-md-12 mb-4">
-                        <label for="berat_badan">Berat Badan</label>
+                        <label for="berat_badan">Berat Badan(KG)</label>
                         <input type="number" step="0.1" class="form-control" id="berat_badan" placeholder="" name="bb" value="" required>
                         <div class="valid-feedback">
                             Looks good!
@@ -49,7 +49,7 @@
                 </div>
                 <div class="form-row">
                     <div class="col-md-12 mb-4">
-                        <label for="tingi_badan">Tinggi Badan</label>
+                        <label for="tingi_badan">Tinggi Badan(CM)</label>
                         <input type="number" step="0.1" class="form-control" id="tingi_badan" placeholder="" name="tb" value="" required>
                         <div class="valid-feedback">
                             Looks good!
@@ -61,7 +61,7 @@
                 </div>
                 <div class="form-row">
                     <div class="col-md-12 mb-4">
-                        <label for="lla">Linkar Lengan Atas</label>
+                        <label for="lla">Linkar Lengan Atas(CM)</label>
                         <input type="number" step="0.1" class="form-control" id="lla" placeholder="" name="lla" value="" required>
                         <div class="valid-feedback">
                             Looks good!
