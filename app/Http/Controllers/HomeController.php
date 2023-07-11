@@ -49,9 +49,10 @@ class HomeController extends Controller
     }
 
     public function blogKategori($slug){
-        $kategori = Kategori::where('slug', '=', $slug)->first();
-        $blog = Blog::where('kategori_id', '=', $kategori->id)->paginate(5);
+        $kategoriBlog = Kategori::where('slug', '=', $slug)->first();
+        $blog = Blog::where('kategori_id', '=', $kategoriBlog->id)->paginate(5);
         $recent = Blog::limit(3)->get();
+        $kategori = Kategori::limit(5)->get();
         return view('user.blog', compact('blog', 'kategori', 'recent'));
     }
 

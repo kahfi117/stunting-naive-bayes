@@ -101,20 +101,15 @@
                                 </form>
                             </div>
                             <!--=== Category Widget ===-->
-                            @if (url('/blog/kategori'))
-                            @else
                             <div class="sidebar-widget category-widget mb-30 wow fadeInUp">
                                 <h5 class="widget-title">Kategory</h5>
                                 <ul class="category-nav">
-                                    @forelse ($kategori as $kat)
-                                    <li><a href="{{ route('blogKategori', $kat->slug) }}">{{ $kat->nama }}<i class="far fa-arrow-right"></i></a></li>
-                                    @empty
-                                        
-                                    @endforelse
+                                    @foreach ($kategori as $kat)
+                                    <li><a href="{{ route('blogKategori', $kat->slug) }}">{{ $kat->nama }}<i class="far fa-arrow-right"></i></a></li>   
+                                    @endforeach
                                 </ul>
                             </div>
                                 
-                            @endif
                             <!--=== Recent Post Widget ===-->
                             <div class="sidebar-widget recent-post-widget mb-40 wow fadeInUp">
                                 <h5 class="widget-title">Recent Blog</h5>

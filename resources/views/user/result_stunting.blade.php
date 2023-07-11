@@ -100,6 +100,17 @@
                                         </p>
                                         <span class="line"></span>
                                     </div>
+                                    <div class="text">
+                                        <p>
+                                            Rekomendasi Bacaan Untuk Anda
+                                            <span class="thin">
+                                                <a href="{{ route('blog') }}">
+                                                {{-- <a href="{{ url('blog/kategori/absence') }}"> --}}
+                                                    Klik Disini
+                                                </a>
+                                            </span>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -139,7 +150,20 @@
                                         </h6>
                                         <p style="text-transform: capitalize">Hasil Sistem Mengatakan : Beresiko
                                             Stunting
+                                        </p>
                                             <span class="line"></span>
+                                    </div>
+                                    <div class="text">
+                                        <p>
+                                            Rekomendasi Bacaan Untuk Anda
+                                            <span class="thin">
+                                                <a href="{{ route('blog') }}">
+                                                {{-- <a href="{{ url('blog/kategori/absence') }}"> --}}
+                                                    Klik Disini
+                                                </a>
+                                            </span>
+                                        </p>
+
                                     </div>
                                 </div>
                             </div>
