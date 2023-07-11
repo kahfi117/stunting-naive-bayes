@@ -152,7 +152,7 @@
 
     </section>
     <!--====== End Who-we Section ======-->
-    <!--====== Start Blog Section ======-->
+    {{-- <!--====== Start Blog Section ======-->
     <section class="blog-section pt-90 pb-50">
         <div class="container">
             <div class="row justify-content-center">
@@ -190,7 +190,7 @@
             </div>
         </div>
     </section>
-    <!--====== End Blog Section ======-->
+    <!--====== End Blog Section ======--> --}}
     @include('user.modal')
 
     @include('user.layouts.footer')
