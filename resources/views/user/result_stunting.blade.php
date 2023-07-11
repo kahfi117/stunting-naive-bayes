@@ -156,9 +156,9 @@
     <section class="blog-section pt-90 pb-50">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-xl-6 col-lg-10">
+                <div class="col-xl-12 col-lg-12">
                     <div class="section-title text-center mb-50 wow fadeInDown">
-                        <h2>Rekomendasi Bacaan Untuk Anda<span class="thin">Articles & Tips</span></h2>
+                        <h2>Rekomendasi Bacaan Untuk Anda <br><span class="thin">Articles & Tips</span></h2>
                     </div>
                 </div>
             </div>
