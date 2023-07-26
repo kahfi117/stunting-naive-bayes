@@ -105,7 +105,7 @@
                                     <li class="post-thumbnail-content">
                                         <img src="{{ url('images/'.$rt->tumbnail) }}" alt="post thumb">
                                         <div class="post-title-date">
-                                            <h5><a href="blog-details.html">{{$rt->title}}</a></h5>
+                                            <h5><a href="{{ route('detailBlog', $rt->slug) }}">{{$rt->title}}</a></h5>
                                             <span class="posted-on"><i class="far fa-calendar-alt"></i><a href="#">{{ date('M d,Y', strtotime($rt->updated_at)) }}</a></span>
                                         </div>
                                     </li>

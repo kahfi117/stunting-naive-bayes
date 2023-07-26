@@ -70,11 +70,11 @@
                                     <td>{{ $item->lingkar_atas }}</td>
                                     @if ($item->status == 'absence')
                                     <td>
-                                        <span class="badge badge-primary"> Absence </span>
+                                        <span class="badge badge-primary"> Tidak Beresiko </span>
                                     </td>
                                     @else
                                     <td>
-                                        <span class="badge badge-danger"> Presence </span>
+                                        <span class="badge badge-danger"> Beresiko </span>
                                     </td>
                                         
                                     @endif

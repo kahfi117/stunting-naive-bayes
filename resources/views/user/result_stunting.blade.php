@@ -104,8 +104,8 @@
                                         <p>
                                             Rekomendasi Bacaan Untuk Anda
                                             <span class="thin" style="color : blue">
-                                                <a href="{{ route('blog') }}">
-                                                {{-- <a href="{{ url('blog/kategori/absence') }}"> --}}
+                                                <!-- <a href="{{ route('blog') }}"> -->
+                                                <a href="{{ url('blog/kategori/absence') }}"> 
                                                     Klik Disini
                                                 </a>
                                             </span>
@@ -154,11 +154,11 @@
                                             <span class="line"></span>
                                     </div>
                                     <div class="text">
-                                        <p>
+                                        <p style="font-size: 25px">
                                             Rekomendasi Bacaan Untuk Anda
                                             <span class="thin" style="color : blue">
-                                                <a href="{{ route('blog') }}">
-                                                {{-- <a href="{{ url('blog/kategori/absence') }}"> --}}
+                                                <!-- <a href="{{ route('blog') }}"> -->
+                                                <a href="{{ url('blog/kategori/presence') }}"> 
                                                     Klik Disini
                                                 </a>
                                             </span>

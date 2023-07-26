@@ -60,7 +60,7 @@
                     </div>
                     <div class="form-row">
                         <div class="col-md-12 mb-4">
-                            <label for="age">Umur</label>
+                            <label for="age">Umur (bulan)</label>
                             <input type="number" class="form-control" id="age" placeholder="" name="umur" value="" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -72,7 +72,7 @@
                     </div>
                     <div class="form-row">
                         <div class="col-md-12 mb-4">
-                            <label for="berat_badan">Berat Badan</label>
+                            <label for="berat_badan">Berat Badan (Kg)</label>
                             <input type="number" step="0.1" class="form-control" id="berat_badan" placeholder="" name="berat_badan" value="" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -84,7 +84,7 @@
                     </div>
                     <div class="form-row">
                         <div class="col-md-12 mb-4">
-                            <label for="tingi_badan">Tinggi Badan</label>
+                            <label for="tingi_badan">Tinggi Badan (Cm)</label>
                             <input type="number" step="0.1" class="form-control" id="tingi_badan" placeholder="" name="tinggi_badan" value="" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -96,7 +96,7 @@
                     </div>
                     <div class="form-row">
                         <div class="col-md-12 mb-4">
-                            <label for="lla">Linkar Lengan Atas</label>
+                            <label for="lla">Linkar Lengan Atas (cm)</label>
                             <input type="number" step="0.1" class="form-control" id="lla" placeholder="" name="lingkar_atas" value="" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -111,8 +111,8 @@
                             <label for="status">Nama Kategori</label>
                             <select class="custom-select mb-4" name="status" id="status" required>
                                 <option selected>Open this select menu</option>
-                                <option value="absence">Absence</option>
-                                <option value="presence">Presence</option>
+                                <option value="absence">Tidak Beresiko</option>
+                                <option value="presence">Beresiko</option>
                             </select>
                         </div>
                     </div>
@@ -135,7 +135,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Kategori </h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Data </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
@@ -159,7 +159,7 @@
                     </div>
                     <div class="form-row">
                         <div class="col-md-12 mb-4">
-                            <label for="age">Umur</label>
+                            <label for="age">Umur (Bulan)</label>
                             <input type="number" class="form-control" id="age" placeholder="" name="umur" value="{{ $item->umur }}" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -171,7 +171,7 @@
                     </div>
                     <div class="form-row">
                         <div class="col-md-12 mb-4">
-                            <label for="berat_badan">Berat Badan</label>
+                            <label for="berat_badan">Berat Badan (Kg)</label>
                             <input type="number" step="0.1" class="form-control" id="berat_badan" placeholder="" name="berat_badan" value="{{ $item->berat_badan }}" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -183,7 +183,7 @@
                     </div>
                     <div class="form-row">
                         <div class="col-md-12 mb-4">
-                            <label for="tingi_badan">Tinggi Badan</label>
+                            <label for="tingi_badan">Tinggi Badan (Cm)</label>
                             <input type="number" step="0.1" class="form-control" id="tingi_badan" placeholder="" name="tinggi_badan" value="{{ $item->tinggi_badan }}" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -195,7 +195,7 @@
                     </div>
                     <div class="form-row">
                         <div class="col-md-12 mb-4">
-                            <label for="lla">Lingkar Lengan Atas</label>
+                            <label for="lla">Lingkar Lengan Atas (Cm)</label>
                             <input type="number" step="0.1" class="form-control" id="lla" placeholder="" name="lingkar_atas" value="{{ $item->lingkar_atas }}" required>
                             <div class="valid-feedback">
                                 Looks good!
@@ -210,11 +210,11 @@
                             <label for="status">Status</label>
                             <select class="custom-select mb-4" name="status" id="status" required>
                                 @if ($item->status == 'absence')
-                                    <option value="absence" selected>Absence</option>
-                                    <option value="presence">Presence</option>
+                                    <option value="absence" selected>Tidak Beresiko</option>
+                                    <option value="presence">Beresiko</option>
                                 @else
-                                    <option value="absence">Absence</option>
-                                    <option value="presence" selected>Presence</option>
+                                    <option value="absence">Tidak Beresiko</option>
+                                    <option value="presence" selected>Beresiko</option>
                                 @endif
                             </select>
                         </div>
