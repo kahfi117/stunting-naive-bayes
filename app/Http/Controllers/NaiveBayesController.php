@@ -34,16 +34,6 @@ class NaiveBayesController extends Controller
             $labels[] = $data->status;
         }
 
-        // // Membuat model Naive Bayes dan melatihnya dengan data latih
-        // $classifier = new NaiveBayes();
-        // $dataset = new ArrayDataset($samples, $labels);
-        // $classifier->train($dataset->getSamples(), $dataset->getTargets());
-
-        // $predictions = $classifier->predict($dataset->getSamples());
-
-        // // Melakukan prediksi kelas untuk data uji
-        // $predicted = $classifier->predict([$umur, $bb, $tb, $lla]);
-
         $trainingData = Training::all();
         $totalData = $trainingData->count();
 
@@ -239,21 +229,6 @@ class NaiveBayesController extends Controller
         {
             $predicted = 'presence';
         }
-
-
-
-        // dd($predicted , $nilaiAbsence, $nilaiPresence);
-
-        // // Menyimpan data uji dan hasil prediksi ke dalam database
-        // DB::table('data_testing')->insert([
-        //     'nama' => $nama,
-        //     'umur' => $umur,
-        //     'bb' => $bb,
-        //     'tb' => $tb,
-        //     'lla' => $lla,
-        //     'status' => $predicted,
-        //     'created_at' => Carbon::now()
-        // ]);
 
         $blog = Blog::all()->random(3);
 
@@ -506,38 +481,262 @@ class NaiveBayesController extends Controller
 
     public function ujiMassal()
     {
-        $dataTraining = DB::table('trainings')->get();
-
-        $samples = [];
-        $labels = [];
-        foreach ($dataTraining as $data) {
-            $samples[] = [$data->umur, $data->berat_badan, $data->tinggi_badan, $data->lingkar_atas];
-            $labels[] = $data->status;
-        }
-
-        $dataUjiMassal = Training::all();
+        $datas = Training::all();
 
 
-        foreach ($dataUjiMassal as $dataUji) {
-            // Mengelompokkan atribut data training
-            $samples = [];
-            $labels = [];
-            foreach ($dataTraining as $data) {
-                $samples[] = [$data->umur, $data->berat_badan, $data->tinggi_badan, $data->lingkar_atas];
-                $labels[] = $data->status;
+        foreach($datas as $data)
+        {
+            $nama = $data->nama;
+            $umur = $data->umur;
+            $bb = $data->berat_badan;
+            $tb = $data->tinggi_badan;
+            $lla = $data->lingkar_atas;
+            $stats = $data->status;
+
+            $totalData = $datas->count();
+
+            $statusAbsence = Training::where('status', 'absence')->count();
+            $statusPresence = Training::where('status', 'presence')->count();
+    
+            $peluangStatusAbsence = $statusAbsence / $totalData;
+            $peluangStatusPresence = $statusPresence / $totalData;
+    
+    
+    
+            // attribut Umur
+    
+            if($umur >= 0 && $umur < 25)
+            {
+                $umurCat = Training::where('umur', '>=', 0)
+                    ->where('umur', '<', 25)
+                    ->whereIn('status', ['absence', 'presence'])
+                    ->selectRaw('status, COUNT(*) as count')
+                    ->groupBy('status')
+                    ->pluck('count', 'status')
+                    ->toArray();
             }
+            elseif($umur >= 25 && $umur < 49)
+            {
+                $umurCat = Training::where('umur', '>=', 25)
+                    ->where('umur', '<', 49)
+                    ->whereIn('status', ['absence', 'presence'])
+                    ->selectRaw('status, COUNT(*) as count')
+                    ->groupBy('status')
+                    ->pluck('count', 'status')
+                    ->toArray();
+            }
+            else
+            {
+                $umurCat = Training::where('umur', '>=', 49)
+                    ->whereIn('status', ['absence', 'presence'])
+                    ->selectRaw('status, COUNT(*) as count')
+                    ->groupBy('status')
+                    ->pluck('count', 'status')
+                    ->toArray();
+            }
+    
+            // Nilai Peluang Umur
+            $peluangAbsenceUmur = isset($umurCat['absence']) ? $umurCat['absence'] / $statusAbsence : 0;
+            $peluangPresenceUmur = isset($umurCat['presence']) ? $umurCat['presence'] / $statusPresence : 0;
+    
+            // Attribut Berat Badan
+            if ($bb >= 0 && $bb < 6)
+            {
+                $bbCat = Training::where('berat_badan', '>=', 0)
+                    ->where('berat_badan', '<', 6)
+                    ->whereIn('status', ['absence', 'presence'])
+                    ->selectRaw('status, COUNT(*) as count')
+                    ->groupBy('status')
+                    ->pluck('count', 'status')
+                    ->toArray();
+            }
+            elseif ($bb >= 6 && $bb < 11)
+            {
+                $bbCat = Training::where('berat_badan', '>=', 6)
+                    ->where('berat_badan', '<', 11)
+                    ->whereIn('status', ['absence', 'presence'])
+                    ->selectRaw('status, COUNT(*) as count')
+                    ->groupBy('status')
+                    ->pluck('count', 'status')
+                    ->toArray();
+            }
+            elseif ($bb >= 11 && $bb < 16)
+            {
+                $bbCat = Training::where('berat_badan', '>=', 11)
+                    ->where('berat_badan', '<', 16)
+                    ->whereIn('status', ['absence', 'presence'])
+                    ->selectRaw('status, COUNT(*) as count')
+                    ->groupBy('status')
+                    ->pluck('count', 'status')
+                    ->toArray();
+            }
+            elseif ($bb >= 16 && $bb < 21)
+            {
+                $bbCat = Training::where('berat_badan', '>=', 16)
+                    ->where('berat_badan', '<', 21)
+                    ->whereIn('status', ['absence', 'presence'])
+                    ->selectRaw('status, COUNT(*) as count')
+                    ->groupBy('status')
+                    ->pluck('count', 'status')
+                    ->toArray();
+            }
+            else
+            {
+                $bbCat = Training::where('berat_badan', '>=', 21)
+                    ->whereIn('status', ['absence', 'presence'])
+                    ->selectRaw('status, COUNT(*) as count')
+                    ->groupBy('status')
+                    ->pluck('count', 'status')
+                    ->toArray();
+            }
+    
+            // Nilai Peluang Berat Badan
+            $peluangAbsenceBb = isset($bbCat['absence']) ? $bbCat['absence'] / $statusAbsence : 0;
+            $peluangPresenceBb = isset($bbCat['presence']) ? $bbCat['presence'] / $statusPresence : 0;
+    
+    
+            //Attribut Tinggi Badan
+            if($tb >= 0 && $tb < 26)
+            {
+                $tbCat = Training::where('tinggi_badan', '>=', 0)
+                    ->where('tinggi_badan', '<', 26)
+                    ->whereIn('status', ['absence', 'presence'])
+                    ->selectRaw('status, COUNT(*) as count')
+                    ->groupBy('status')
+                    ->pluck('count', 'status')
+                    ->toArray();
+            }
+            elseif($tb >=26 && $tb < 51)
+            {
+                $tbCat = Training::where('tinggi_badan', '>=', 26)
+                    ->where('tinggi_badan', '<', 51)
+                    ->whereIn('status', ['absence', 'presence'])
+                    ->selectRaw('status, COUNT(*) as count')
+                    ->groupBy('status')
+                    ->pluck('count', 'status')
+                    ->toArray();
+            }
+            elseif($tb >= 51 && $tb < 76)
+            {
+                $tbCat = Training::where('tinggi_badan', '>=', 51)
+                    ->where('tinggi_badan', '<', 76)
+                    ->whereIn('status', ['absence', 'presence'])
+                    ->selectRaw('status, COUNT(*) as count')
+                    ->groupBy('status')
+                    ->pluck('count', 'status')
+                    ->toArray();
+            }
+            elseif($tb >= 76 && $tb < 100)
+            {
+                $tbCat = Training::where('tinggi_badan', '>=', 76)
+                    ->where('tinggi_badan', '<', 100)
+                    ->whereIn('status', ['absence', 'presence'])
+                    ->selectRaw('status, COUNT(*) as count')
+                    ->groupBy('status')
+                    ->pluck('count', 'status')
+                    ->toArray();
+            }
+            else
+            {
+                $tbCat = Training::where('tinggi_badan', '>=', 100)
+                    ->whereIn('status', ['absence', 'presence'])
+                    ->selectRaw('status, COUNT(*) as count')
+                    ->groupBy('status')
+                    ->pluck('count', 'status')
+                    ->toArray();
+            }
+    
+            // Nilai Peluang Berat Badan
+            $peluangAbsenceTb = isset($tbCat['absence']) ? $tbCat['absence'] / $statusAbsence : 0;
+            $peluangPresenceTb = isset($tbCat['presence']) ? $tbCat['presence'] / $statusPresence : 0;
+    
+    
+            // Lingkar Atas
+            if($lla >= 0 && $lla < 16)
+            {
+                $llaCat = Training::where('lingkar_atas', '>=', 0)
+                    ->where('lingkar_atas', '<', 16)
+                    ->whereIn('status', ['absence', 'presence'])
+                    ->selectRaw('status, COUNT(*) as count')
+                    ->groupBy('status')
+                    ->pluck('count', 'status')
+                    ->toArray();
+            }
+            else
+            {
+                $llaCat = Training::where('lingkar_atas', '>=', 16)
+                    ->whereIn('status', ['absence', 'presence'])
+                    ->selectRaw('status, COUNT(*) as count')
+                    ->groupBy('status')
+                    ->pluck('count', 'status')
+                    ->toArray();
+            }
+    
+            // Nilai Peluang Lingkar Atas
+            $peluangAbsenceLla = isset($llaCat['absence']) ? $llaCat['absence'] / $statusAbsence : 0;
+            $peluangPresenceLla = isset($llaCat['presence']) ? $llaCat['presence'] / $statusPresence : 0;
+    
+            $nilaiAbsence = ($peluangAbsenceUmur * $peluangAbsenceBb * $peluangAbsenceTb * $peluangAbsenceLla) * $peluangStatusAbsence;
+            $nilaiPresence = ($peluangPresenceUmur * $peluangPresenceBb * $peluangPresenceTb * $peluangPresenceLla) * $peluangStatusPresence;
+    
+            if($nilaiAbsence > $nilaiPresence)
+            {
+                $predicted = 'absence';
+            }
+            else
+            {
+                $predicted = 'presence';
+            }
+            
+            $predictions[] = [
+                'nama' => $nama,
+                'umur' => $umur,
+                'bb' => $bb,
+                'tb' => $tb,
+                'lla' => $lla,
+                'status_awal' => $stats,
+                'status' => $predicted
+            ];
 
-
-            // Membuat model Naive Bayes dan melatihnya dengan data training
-            $classifier = new NaiveBayes();
-            $dataset = new ArrayDataset($samples, $labels);
-            $classifier->train($dataset->getSamples(), $dataset->getTargets());
-
-            // Melakukan prediksi kelas untuk data uji
-            $predicted = $classifier->predict([$dataUji['umur'], $dataUji['berat_badan'], $dataUji['tinggi_badan'], $dataUji['lingkar_atas']]);
-            $predictedResults[] = $predicted;
         }
 
-        return view('admin.training.hasil_training', compact('predictedResults', 'dataUjiMassal'));
-    }
+        return view('admin.training.hasil_training', compact('predictions'));
+}
+
+    // public function ujiMassal()
+    // {
+    //     $dataTraining = DB::table('trainings')->get();
+
+    //     $samples = [];
+    //     $labels = [];
+    //     foreach ($dataTraining as $data) {
+    //         $samples[] = [$data->umur, $data->berat_badan, $data->tinggi_badan, $data->lingkar_atas];
+    //         $labels[] = $data->status;
+    //     }
+
+    //     $dataUjiMassal = Training::all();
+
+
+    //     foreach ($dataUjiMassal as $dataUji) {
+    //         // Mengelompokkan atribut data training
+    //         $samples = [];
+    //         $labels = [];
+    //         foreach ($dataTraining as $data) {
+    //             $samples[] = [$data->umur, $data->berat_badan, $data->tinggi_badan, $data->lingkar_atas];
+    //             $labels[] = $data->status;
+    //         }
+
+
+    //         // Membuat model Naive Bayes dan melatihnya dengan data training
+    //         $classifier = new NaiveBayes();
+    //         $dataset = new ArrayDataset($samples, $labels);
+    //         $classifier->train($dataset->getSamples(), $dataset->getTargets());
+
+    //         // Melakukan prediksi kelas untuk data uji
+    //         $predicted = $classifier->predict([$dataUji['umur'], $dataUji['berat_badan'], $dataUji['tinggi_badan'], $dataUji['lingkar_atas']]);
+    //         $predictedResults[] = $predicted;
+    //     }
+
+    //     return view('admin.training.hasil_training', compact('predictedResults', 'dataUjiMassal'));
+    // }
 }

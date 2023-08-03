@@ -52,15 +52,15 @@
                                 $no = 1;
                             @endphp
                             <tbody>
-                                @foreach ($predictedResults as $index => $predicted)
+                                @foreach ($predictions as $predicted)
                                 <tr>
-                                    <td>{{ $index + 1 }}</td>
-                                    <td>{{ $dataUjiMassal[$index]['nama'] }}</td>
-                                    <td>{{ $dataUjiMassal[$index]['umur'] }}</td>
-                                    <td>{{ $dataUjiMassal[$index]['berat_badan'] }}</td>
-                                    <td>{{ $dataUjiMassal[$index]['tinggi_badan'] }}</td>
-                                    <td>{{ $dataUjiMassal[$index]['lingkar_atas'] }}</td>
-                                    @if ($dataUjiMassal[$index]['status'] == 'absence')
+                                    <td>{{ $no++ }}</td>
+                                    <td>{{ $predicted['nama'] }}</td>
+                                    <td>{{ $predicted['umur'] }}</td>
+                                    <td>{{ $predicted['bb'] }}</td>
+                                    <td>{{ $predicted['tb'] }}</td>
+                                    <td>{{ $predicted['lla'] }}</td>
+                                    @if ($predicted['status_awal'] == 'absence')
                                     <td>
                                         <span class="badge badge-primary"> Absence </span>
                                     </td>
@@ -69,7 +69,7 @@
                                         <span class="badge badge-danger"> Presence </span>
                                     </td>
                                     @endif
-                                    @if ($predicted == 'absence')
+                                    @if ($predicted['status'] == 'absence')
                                     <td>
                                         <span class="badge badge-primary"> Absence </span>
                                     </td>

@@ -34,11 +34,11 @@
                             <button class="btn btn-success mt-2" data-toggle="modal" data-target="#newExportModal">Import Data Training</button>
                             <button class="btn btn-danger mt-2" data-toggle="modal" data-target="#truncateModal">Bersihkan Data Traning</button>
                         </div>
-                        {{-- @if ($training->count() != 0)
-                        <div class="col-6 text-right">
-                            <a href="#" class="btn btn-success mt-2">Uji Data Traning</a>
+                        @if ($training->count() != 0)
+                        <div class="col-6">
+                            <a href="{{ route('ujiMassalStunting') }}" class="btn btn-success mt-2">Uji Data Traning</a>
                         </div>
-                        @endif --}}
+                        @endif
 
                     </div>
                     
